@@ -12,8 +12,10 @@ class HomeController
     {
         $this->twig = TwigService::getInstance();
     }
-    public function showHome()
+    public function showHome(array $articles)
     {
-        echo $this->twig->getTwig()->render("home.html.twig");
+        echo $this->twig->getTwig()->render("home.html.twig", [
+            "articles" => $articles
+        ]);
     }
 }

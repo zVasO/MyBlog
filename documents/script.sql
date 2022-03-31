@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Article` (
   `created_at` DATETIME NOT NULL,
   `updated_at` DATETIME NOT NULL,
   `User_id` INT NOT NULL,
-  `status` ENUM('waitin', 'published') NOT NULL,
+  `status` ENUM('waiting', 'published') NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Article_User1_idx` (`User_id` ASC) ,
   CONSTRAINT `fk_Article_User1`
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Comment` (
   `content` VARCHAR(45) NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `User_id` INT NOT NULL,
-  `status` ENUM('waitin', 'published') NOT NULL,
+  `status` ENUM('waiting', 'published') NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Comment_User1_idx` (`User_id` ASC) ,
   CONSTRAINT `fk_Comment_User1`
