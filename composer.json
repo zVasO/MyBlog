@@ -3,7 +3,7 @@
     "description": "Project 5 of OpenClassrooms",
     "autoload": {
         "psr-4": {
-            "Dylan\\MyBlog\\": "src/"
+            "App\\": "src/"
         }
     },
     "require": {
