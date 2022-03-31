@@ -8,9 +8,9 @@ use App\Service\TwigService;
 class HomeController
 {
     private TwigService $twig;
-    public function __construct(TwigService $twig)
+    public function __construct()
     {
-        $this->twig = $twig;
+        $this->twig = TwigService::getInstance();
     }
     public function showHome()
     {
