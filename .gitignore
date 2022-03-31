@@ -3,3 +3,5 @@
 /vendor/
 tools/
 .php-cs-fixer.cache
+cache/
+.github/
