@@ -1,3 +1,5 @@
 .visio/
 .idea/
 /vendor/
+tools/
+.php-cs-fixer.cache
