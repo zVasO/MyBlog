@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace App\Controller;
 
-use App\Service\TwigService;
+use App\Services\TwigService;
 
 class HomeController
 {

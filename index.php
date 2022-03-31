@@ -2,11 +2,11 @@
 require 'vendor/autoload.php';
 
 use App\Model\Article;
-use App\Service\TwigService;
+use App\Services\TwigService;
 use App\Controller\HomeController;
 
-$twigService = new TwigService();
-$homeController = new homeController($twigService);
+$homeController = new homeController();
 $article = new Article();
-
+var_dump($article->getAllArticles());
+die;
 $homeController->showHome($article->getAllArticles());
