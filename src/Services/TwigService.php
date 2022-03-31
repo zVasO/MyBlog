@@ -16,7 +16,7 @@ class TwigService
     public function __construct()
     {
         $templatesPath =  dirname(__DIR__) . DIRECTORY_SEPARATOR . self::BASE_VIEW_DIR_NAME;
-        $loader = new FilesystemLoader($templatesPath);
+        $loader = new FilesystemLoader($templatesPath, getcwd());
         $twig = new Environment($loader, [
             'cache' => false,
             'debug' => true

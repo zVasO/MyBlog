@@ -7,6 +7,4 @@ use App\Controller\HomeController;
 
 $homeController = new homeController();
 $article = new Article();
-var_dump($article->getAllArticles());
-die;
-$homeController->showHome($article->getAllArticles());
+$homeController->showHome($article->getArticlesByNumber(6));

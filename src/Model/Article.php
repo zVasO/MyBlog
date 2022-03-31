@@ -18,4 +18,8 @@ class Article
     {
         return $this->database->getPdo()->query('SELECT * FROM article')->fetchAll();
     }
+    public function getArticlesByNumber(int $numberOfArticles)
+    {
+        return $this->database->getPdo()->query("SELECT * FROM article LIMIT $numberOfArticles")->fetchAll();
+    }
 }
