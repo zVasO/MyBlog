@@ -18,4 +18,10 @@ class HomeController
             "articles" => $articles
         ]);
     }
+    public function showBlog(array $articles)
+    {
+        echo $this->twig->getTwig()->render("blog.html.twig", [
+            "articles" => $articles
+        ]);
+    }
 }
