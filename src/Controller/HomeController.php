@@ -23,10 +23,4 @@ class HomeController
             "articles" => $this->articles->getArticlesByNumber(self::HOME_ARTICLES_NUMBER)
         ]);
     }
-    public function showBlog()
-    {
-        echo $this->twig->getTwig()->render("blog.html.twig", [
-            "articles" => $this->articles
-        ]);
-    }
 }
