@@ -65,72 +65,18 @@
         </div>
         <!-- Portfolio Grid Items-->
         <div class="row justify-content-center">
-            <!-- Portfolio Item 1-->
+            {%  for article in articles %}
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="portfolio-item mx-auto">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <h2>Pourquoi cet article est le meilleur ?</h2><br>
-                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci autem earum, error, est facilis illo iure necessitatibus non, nulla perferendis perspiciatis provident reprehenderit repudiandae sapiente vitae voluptatem. Suscipit?</span></p>
-                    <h5>Derniere modification : 31/03/2020</h5>
+                    <h2>{{ article.title }}</h2><br>
+                    <p><span>{{ article.header }}</span></p>
+                    <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
                 </div>
             </div>
-            <!-- Portfolio Item 2-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <h2>Pourquoi cet article est le meilleur ?</h2><br>
-                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci autem earum, error?</span></p>
-                    <h5>Derniere modification : 31/03/2020</h5>
-                </div>
-            </div>
-            <!-- Portfolio Item 3-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <h2>Un titre différent</h2><br>
-                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci autem earum, error, est facilis illo iure necessitatibus non, nulla perferendis perspiciatis provident reprehenderit repudiandae sapiente vitae voluptatem. Suscipit?</span></p>
-                    <h5>Derniere modification : 31/03/2020</h5>
-                </div>
-            </div>
-            <!-- Portfolio Item 4-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <h2>Pourquoi cet article est le meilleur ?</h2><br>
-                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci autem earum, error, est facilis illo iure necessitatibus non, nulla perferendis perspiciatis provident reprehenderit repudiandae sapiente vitae voluptatem. Suscipit?</span></p>
-                    <h5>Derniere modification : 31/03/2020</h5>
-                </div>
-            </div>
-            <!-- Portfolio Item 5-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <h2>Pourquoi cet article est le meilleur ?</h2><br>
-                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci autem earum, error, est facilis illo iure necessitatibus non, nulla perferendis perspiciatis provident reprehenderit repudiandae sapiente vitae voluptatem. Suscipit?</span></p>
-                    <h5>Derniere modification : 31/03/2020</h5>
-                </div>
-            </div>
-            <!-- Portfolio Item 6-->
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
-                    <h2>Pourquoi cet article est le meilleur ?</h2><br>
-                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci autem earum, error, est facilis illo iure necessitatibus non, nulla perferendis perspiciatis provident reprehenderit repudiandae sapiente vitae voluptatem. Suscipit?</span></p>
-                    <h5>Derniere modification : 31/03/2020</h5>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

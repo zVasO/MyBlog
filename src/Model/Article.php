@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace App\Model;
 
-use App\Service\DatabaseService;
+use App\Services\DatabaseService;
 
 class Article
 {
@@ -17,5 +17,9 @@ class Article
     public function getAllArticles(): bool|array
     {
         return $this->database->getPdo()->query('SELECT * FROM article')->fetchAll();
+    }
+    public function getArticlesByNumber(int $numberOfArticles)
+    {
+        return $this->database->getPdo()->query("SELECT * FROM article LIMIT $numberOfArticles")->fetchAll();
     }
 }

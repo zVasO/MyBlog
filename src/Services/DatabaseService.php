@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-namespace App\Service;
+namespace App\Services;
 
 use PDO;
 
@@ -18,7 +18,7 @@ class DatabaseService
     public function __construct()
     {
         $this->pdo = new PDO("mysql:host=".self::PARAM_host.';port='.self::PARAM_port.';dbname='.self::PARAM_db_name,
-            self::PARAM_user,self::PARAM_db_pass);
+            self::PARAM_user,self::PARAM_db_pass,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     }
 
     /**
