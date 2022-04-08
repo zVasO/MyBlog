@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 namespace App\Service;
+
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
-
-
 
 class TwigService
 {
