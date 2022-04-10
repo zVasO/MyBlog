@@ -10,8 +10,7 @@ use App\Controller\HomeController;
 
 
 
-
-if (str_ends_with($_SERVER['PHP_SELF'], "/home")) {
+if (str_ends_with($_SERVER['PHP_SELF'], "index.php")) {
     $homeController = new homeController();
     $homeController->showHome();
 } elseif (str_ends_with($_SERVER['PHP_SELF'], "/blog")) {
