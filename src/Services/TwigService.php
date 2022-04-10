@@ -13,6 +13,7 @@ class TwigService
     private static array $instances = [];
     private Environment $twig;
 
+
     public function __construct()
     {
         $templatesPath =  dirname(__DIR__) . DIRECTORY_SEPARATOR . self::BASE_VIEW_DIR_NAME;
