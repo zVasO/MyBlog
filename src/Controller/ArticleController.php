@@ -29,8 +29,15 @@ class ArticleController
      */
     public function showArticle(int $idArticle)
     {
-        echo $this->twig->getTwig()->render("article.html.twig", [
-            "article" => $this->articles->getArticleById($idArticle)
-        ]);
+        if ($this->articles->getArticleById($idArticle) !== false) {
+            echo $this->twig->getTwig()->render("article.html.twig", [
+                "article" => $this->articles->getArticleById($idArticle)
+            ]);
+        } else {
+            echo $this->twig->getTwig()->render("blog.html.twig", [
+                "articles" => $this->articles->getAllArticles()
+            ]);
+        }
+
     }
 }
