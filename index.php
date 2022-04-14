@@ -8,9 +8,12 @@ use App\Model\Article;
 use App\Services\TwigService;
 use App\Controller\HomeController;
 
+//on recupere les parametre de notre url
 $components = parse_url($_SERVER['REQUEST_URI']);
 parse_str($components['query'], $results);
 
+
+//switch en fonction de l'uri, on donne la page demandée
 switch($_SERVER['QUERY_STRING']) {
     case "/article":
         (new ArticleController())->showArticle((int)$results["id"]);
@@ -22,17 +25,3 @@ switch($_SERVER['QUERY_STRING']) {
         (new HomeController())->showHome();
         break;
 }
-
-
-/*
-if (str_ends_with($_SERVER['PHP_SELF'], "index.php")) {
-    $homeController = new homeController();
-    $homeController->showHome();
-} elseif (str_ends_with($_SERVER['PHP_SELF'], "/blog")) {
-    $blogController = new BlogController();
-    $blogController->showBlog();
-} elseif (str_ends_with($_SERVER['PHP_SELF'], "/article")) {
-    $articleController = new ArticleController();
-    $articleController->showArticle((int)$_GET['id']);
-}
-*/
