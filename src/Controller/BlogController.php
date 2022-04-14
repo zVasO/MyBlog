@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\Article;
@@ -7,6 +8,9 @@ use App\Services\TwigService;
 
 class BlogController
 {
+
+    private TwigService $twig;
+    private Article $articles;
 
     public function __construct()
     {

@@ -6,23 +6,20 @@ namespace App\Controller;
 use App\Model\Article;
 use App\Services\TwigService;
 
-class HomeController
+class ArticleController
 {
     private TwigService $twig;
-    private const HOME_ARTICLES_NUMBER = 6;
     private Article $articles;
 
     public function __construct()
     {
         $this->twig = TwigService::getInstance();
         $this->articles = new Article();
-
     }
-    public function showHome()
+    public function showArticle(int $idArticle)
     {
-
-        echo $this->twig->getTwig()->render("home.html.twig", [
-            "articles" => $this->articles->getArticlesByNumber(self::HOME_ARTICLES_NUMBER)
+        echo $this->twig->getTwig()->render("article.html.twig", [
+            "article" => $this->articles->getArticleById($idArticle)
         ]);
     }
 }

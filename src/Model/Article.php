@@ -22,4 +22,8 @@ class Article
     {
         return $this->database->getPdo()->query("SELECT * FROM article LIMIT $numberOfArticles")->fetchAll();
     }
+    public function getArticleById(int $idArticle)
+    {
+        return $this->database->getPdo()->query("SELECT * FROM article WHERE id = $idArticle")->fetch();
+    }
 }
