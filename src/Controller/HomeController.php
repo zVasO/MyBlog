@@ -10,6 +10,8 @@ class HomeController
 {
     private TwigService $twig;
     private const HOME_ARTICLES_NUMBER = 6;
+    private Article $articles;
+
     public function __construct()
     {
         $this->twig = TwigService::getInstance();

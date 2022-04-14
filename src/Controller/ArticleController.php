@@ -8,6 +8,9 @@ use App\Services\TwigService;
 
 class ArticleController
 {
+    private TwigService $twig;
+    private Article $articles;
+
     public function __construct()
     {
         $this->twig = TwigService::getInstance();
