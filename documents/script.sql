@@ -51,7 +51,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Article`
+-- Table `mydb`.`ArticleModel`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`Article` ;
 
