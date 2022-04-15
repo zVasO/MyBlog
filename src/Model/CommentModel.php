@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Model;
 
 use App\Services\DatabaseService;
+use DateTime;
 use PDO;
 
 class CommentModel
@@ -36,5 +37,10 @@ class CommentModel
             return 0;
         }
 
+    }
+
+    public function addComment(int $articleId, string $comment, int $status, int $userId)
+    {
+        $this->database->getPdo()->query("INSERT INTO comment (content, User_id, status, article_id, createdAt) VALUES ('" . $comment . "', '" . $userId . "', '" . $status . "', '" . $articleId . "' , NOW())");
     }
 }

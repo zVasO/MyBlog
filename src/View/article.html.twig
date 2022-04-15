@@ -1,5 +1,6 @@
 {% extends "template.html.twig" %}
 {%  block main %}
+    {{ form.addComment(article.id) }}
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
@@ -23,6 +24,13 @@
             <hr>
             <div class="row justify-content-center">
                 <h2>Commentaires: </h2><br><br>
+
+                <form action="" method="post">
+                    <textarea name="comment" id="" style="width: 100%; min-height:200px;margin-bottom: 10px"></textarea>
+                    <input type="submit" name="btn-comment" class="btn btn-primary" value="Ajouter">
+                </form>
+                {{ form.getMessage|raw }}
+                
                 {% for comment in comments %}
                     <div>
                         <h6>Par {{ comment.User_id }} :</h6>
@@ -32,6 +40,7 @@
                             <span>Crée le {{ comment.created_at|date("d/m/Y") }} par </span>
                         </p>
                     </div>
+
                     <br>
                 {% endfor %}
             </div>
