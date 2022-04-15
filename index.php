@@ -4,6 +4,7 @@ require 'vendor/autoload.php';
 
 use App\Controller\ArticleController;
 use App\Controller\BlogController;
+use App\Controller\LogInController;
 use App\Model\ArticleModel;
 use App\Services\TwigService;
 use App\Controller\HomeController;
@@ -20,6 +21,9 @@ switch($_SERVER['QUERY_STRING']) {
         break;
     case "/blog":
         (new BlogController())->showBlog();
+        break;
+        case "/login":
+        (new LogInController())->showLoginPage();
         break;
     default:
         (new HomeController())->showHome();
