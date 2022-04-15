@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Services;
 
 use App\Model\UserModel;
@@ -17,27 +18,39 @@ class UserService
         $this->error = [];
     }
 
-    public function logIn(string $email, string $password)
+    public function logIn()
     {
-        //on filter notre email
-        $email = htmlentities($email);
-        //on recupére les infos liées a cet email dans la bdd si il existe sinon un affecte notre erreur
-        $result = $this->user->getUserByEmail($email);
-        if ($result !== false) {
-            //on verifie si nos mot de passe correspondent
-            if (password_verify($password, $result->password)) {
-                $this->error["status"] = "success";
-                $this->error["message"] = "Connexion réussie !";
+        $this->ensureIsNotConnected();
+        if (isset($_POST['button-login'])) {
+            //on filter notre email
+            $email = htmlentities($_POST['email']);
+            //on recupére les infos liées a cet email dans la bdd si il existe sinon un affecte notre erreur
+            $result = $this->user->getUserByEmail($email);
+            if ($result !== false) {
+                //on verifie si nos mot de passe correspondent
+                if (password_verify($_POST['password'], $result->password)) {
+                    //on affecte notre message
+                    echo MessageService::getMessage(MessageService::ALERT_SUCCESS,
+                        "Connexion réussie !");
+                    //on affecte nos variables de session
+                    $_SESSION['status'] = true;
+                    $_SESSION['user_id'] = $result->id;
+                    $_SESSION['email'] = $result->email;
+
+                } else {
+                    echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                        "Mauvais mot de passe !");
+                }
             } else {
-                $this->error["status"] = "danger";
-                $this->error["message"] = "Mauvais mot de passe !";
-                echo "aie";
+                echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                    "Aucun compte ne correspond à cette addresse email !");
             }
         } else {
-            $this->error["status"] = "danger";
-            $this->error["message"] = "Aucun compte ne correspond à cette addresse email !";
+            echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                "Veuillez remplir le formulaire correctement");
         }
     }
+
     public function register(string $email, string $password, string $lastname, string $firstname)
     {
         //on verifie si aucun user existe pour ce mail
@@ -51,8 +64,23 @@ class UserService
             //on appelle la fonction qui ajoute l'utilisateur à la bdd
 
         } else {
-            $this->error["status"] = "danger";
-            $this->error["message"] = "Un compte est déja lié a cet email !!";
+            echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                "Un compte est déja lié a cet email !!");
         }
     }
+
+    public function signOut()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['email']);
+        unset($_SESSION['status']);
+    }
+
+    private function ensureIsNotConnected()
+    {
+        if ($_SESSION['status'] === true) {
+            header("Location:./home");
+        }
+    }
+
 }

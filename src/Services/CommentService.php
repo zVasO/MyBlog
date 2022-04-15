@@ -1,11 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Services;
 
-use App\Model\ArticleModel;
 use App\Model\CommentModel;
-use DateTime;
 
 class CommentService
 {
@@ -28,7 +27,7 @@ class CommentService
      */
     public function addComment(int $articleId)
     {
-        if(isset($_POST['btn-comment'])) {
+        if (isset($_POST['btn-comment'])) {
             //on regarde si l'utilisateur est connecté
             if ($_SESSION['status'] == true) {
                 //on regarde si le commentaire est non null
@@ -36,24 +35,17 @@ class CommentService
                     $comment = htmlentities($_POST['comment']);
                     $status = 1;
                     $this->comment->addComment($articleId, $comment, $status, $_SESSION['user_id']);
-                    $this->error["message"] = "Félicitation, votre message a été pris en compte et est en cours de vérification !!";
-                    $this->error["status"] = "success";
-                } else{
-                    $this->error["message"] = "Veuillez remplir le champs commentaire !";
-                    $this->error["status"] = "danger";
+
+                    echo MessageService::getMessage(MessageService::ALERT_SUCCESS,
+                        "Félicitation, votre message a été pris en compte et est en cours de vérification !!");
+                } else {
+                    echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                        "Veuillez remplir le champs commentaire !");
                 }
             } else {
-                $this->error["message"] = "Veuillez vous connectez pour poster un commentaire !";
-                $this->error["status"] = "danger";
+                echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                    "Veuillez vous connectez pour poster un commentaire !");
             }
-        }
-    }
-    public function getMessage()
-    {
-        if(!empty($this->error)) {
-            return "<div class=\"alert alert-" . $this->error['status'] . "\"role=\"alert\">" . $this->error["message"] . "</div>";
-        } else {
-            return  '';
         }
     }
 }

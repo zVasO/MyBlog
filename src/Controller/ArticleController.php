@@ -18,6 +18,7 @@ class ArticleController
     private CommentModel $comment;
     private BlogController $blog;
     private CommentService $form;
+    const BASE_URL = "/article";
 
     public function __construct()
     {
@@ -41,7 +42,8 @@ class ArticleController
             echo $this->twig->getTwig()->render("article.html.twig", [
                 "article" => $this->articles->getArticleById($idArticle),
                 "comments" => $this->comment->getAllPublishedCommentByArticleId($idArticle),
-                "form" => $this->form
+                "form" => $this->form,
+                "session" => $_SESSION
             ]);
         } else {
             $this->blog->showBlog();

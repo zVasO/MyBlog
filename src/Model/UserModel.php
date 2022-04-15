@@ -7,7 +7,7 @@ use App\Services\DatabaseService;
 class UserModel
 {
 
-    private DatabaseService $databaseService;
+    private DatabaseService $database;
 
     public function __construct()
     {
