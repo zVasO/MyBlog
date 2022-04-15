@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\ArticleModel;
+use App\Model\CommentModel;
 use App\Services\TwigService;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -18,6 +19,8 @@ class ArticleController
     {
         $this->twig = TwigService::getInstance();
         $this->articles = new ArticleModel();
+        $this->comment = new CommentModel();
+        $this->blog =  new BlogController();
     }
 
     /**
@@ -31,12 +34,11 @@ class ArticleController
     {
         if ($this->articles->getArticleById($idArticle) !== false) {
             echo $this->twig->getTwig()->render("article.html.twig", [
-                "article" => $this->articles->getArticleById($idArticle)
+                "article" => $this->articles->getArticleById($idArticle),
+                "comments" => $this->comment->getAllPublishedCommentByArticleId($idArticle)
             ]);
         } else {
-            echo $this->twig->getTwig()->render("blog.html.twig", [
-                "articles" => $this->articles->getAllArticles()
-            ]);
+            $this->blog->showBlog();
         }
 
     }

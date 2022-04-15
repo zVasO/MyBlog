@@ -13,12 +13,27 @@
             </div>
             <!-- Portfolio Grid Items-->
             <div class="row justify-content-center">
+                <div>
+                    <h2>{{ article.title }}</h2><br>
+                    <p><span>{{ article.header }}</span></p>
+                    <p>{{ article.content|nl2br   }}</p>
+                    <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row justify-content-center">
+                <h2>Commentaires: </h2><br><br>
+                {% for comment in comments %}
                     <div>
-                            <h2>{{ article.title }}</h2><br>
-                            <p><span>{{ article.header }}</span></p>
-                            <p>{{ article.content|nl2br   }}</p>
-                            <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
+                        <h6>Par {{ comment.User_id }} :</h6>
+                        <p>
+                            {{ comment.content }}
+                            <br>
+                            <span>Crée le {{ comment.created_at|date("d/m/Y") }} par </span>
+                        </p>
                     </div>
+                    <br>
+                {% endfor %}
             </div>
         </div>
     </section>
