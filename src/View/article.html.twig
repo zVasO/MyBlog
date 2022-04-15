@@ -14,8 +14,7 @@
             <!-- Portfolio Grid Items-->
             <div class="row justify-content-center">
                 <div>
-                    <h2>{{ article.title }}</h2><br>
-                    <p><span>{{ article.header }}</span></p>
+                    <h3>{{ article.header }}</h3><br>
                     <p>{{ article.content|nl2br   }}</p>
                     <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
                 </div>
