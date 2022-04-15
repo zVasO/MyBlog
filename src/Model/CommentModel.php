@@ -18,15 +18,22 @@ class CommentModel
 
     public function getAllComments()
     {
-        return $this->database->getPdo()->query('SELECT * FROM comment', PDO::FETCH_CLASS, ArticleModel::class)->fetchAll();
+        return $this->database->getPdo()->query('SELECT * FROM comment', PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
     }
 
     public function getCommentById(int $id)
     {
-        return $this->database->getPdo()->query("SELECT * FROM comment WHERE id = $id", PDO::FETCH_CLASS, ArticleModel::class)->fetchAll();
+        return $this->database->getPdo()->query("SELECT * FROM comment WHERE id = $id", PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
     }
     public function getNumberOfCommentsByArticle(int $id)
     {
-        return $this->database->getPdo()->query("SELECT COUNT(*) FROM comment WHERE id = $id", PDO::FETCH_CLASS, ArticleModel::class)->fetchAll();
+        $request = $this->database->getPdo()->query("SELECT count(*) as number FROM `comment`, `article` WHERE article.id = $id AND comment.article_id = $id", PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
+
+        if ($request != false)
+        {
+            return $request[0]->number;
+        } else {
+            return 0;
+        }
     }
 }
