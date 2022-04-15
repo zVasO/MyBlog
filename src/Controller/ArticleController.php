@@ -3,7 +3,7 @@
 declare(strict_types=1);
 namespace App\Controller;
 
-use App\Model\Article;
+use App\Model\ArticleModel;
 use App\Services\TwigService;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -12,12 +12,12 @@ use Twig\Error\SyntaxError;
 class ArticleController
 {
     private TwigService $twig;
-    private Article $articles;
+    private ArticleModel $articles;
 
     public function __construct()
     {
         $this->twig = TwigService::getInstance();
-        $this->articles = new Article();
+        $this->articles = new ArticleModel();
     }
 
     /**

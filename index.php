@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 use App\Controller\ArticleController;
 use App\Controller\BlogController;
-use App\Model\Article;
+use App\Model\ArticleModel;
 use App\Services\TwigService;
 use App\Controller\HomeController;
 
