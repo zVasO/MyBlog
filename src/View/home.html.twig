@@ -39,7 +39,13 @@
                     </div>
                     <h2>{{ article.title }}</h2><br>
                     <p><span>{{ article.header }}</span></p>
-                    <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
+                    <div style="display: flex; justify-content: space-between">
+                        <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
+                        <div class="comments" style="">
+                            <i class="fa-solid fa-comment"></i>
+                            {{ comments.NumberOfCommentsByArticle(article.id) }}
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endfor %}

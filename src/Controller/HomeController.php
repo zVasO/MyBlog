@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\ArticleModel;
+use App\Model\CommentModel;
 use App\Services\TwigService;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -19,6 +20,7 @@ class HomeController
     {
         $this->twig = TwigService::getInstance();
         $this->articles = new ArticleModel();
+        $this->comments = new CommentModel();
 
     }
 
@@ -32,7 +34,8 @@ class HomeController
     {
 
         echo $this->twig->getTwig()->render("home.html.twig", [
-            "articles" => $this->articles->getArticlesByNumber(self::HOME_ARTICLES_NUMBER)
+            "articles" => $this->articles->getArticlesByNumber(self::HOME_ARTICLES_NUMBER),
+            "comments" => $this->comments
         ]);
     }
 }
