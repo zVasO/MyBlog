@@ -35,11 +35,11 @@
                 <br>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Confirmez votre mot de passe</label>
-                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Confirmez votre mot de passe" required>
+                    <input type="password" class="form-control" name="confirmedPassword" id="exampleInputPassword1" placeholder="Confirmez votre mot de passe" required>
                 </div>
                 <button type="submit" name="button-signup" class="btn btn-primary mt-2">S'inscrire</button>
             </form>
-            {{ user.logIn }}
+            {{ user.register }}
             <div>
                 <span>Vous possédez déja un compte ?</span><br>
                 <a href="./login">Connectez-vous</a>

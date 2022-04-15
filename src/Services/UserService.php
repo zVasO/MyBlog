@@ -29,14 +29,11 @@ class UserService
             if ($result !== false) {
                 //on verifie si nos mot de passe correspondent
                 if (password_verify($_POST['password'], $result->password)) {
-                    //on affecte notre message
-                    echo MessageService::getMessage(MessageService::ALERT_SUCCESS,
-                        "Connexion réussie !");
                     //on affecte nos variables de session
                     $_SESSION['status'] = true;
                     $_SESSION['user_id'] = $result->id;
                     $_SESSION['email'] = $result->email;
-                    header("Location: ./home");
+
                 } else {
                     echo MessageService::getMessage(MessageService::ALERT_DANGER,
                         "Mauvais mot de passe !");
@@ -48,21 +45,41 @@ class UserService
         }
     }
 
-    public function register(string $email, string $password, string $lastname, string $firstname)
+    public function register()
     {
-        //on verifie si aucun user existe pour ce mail
-        if ($this->user->ensureUserExist($email) === false) {
-            //on filtre nos données et crypte le mdp
-            $email = htmlentities($email);
-            $lastname = htmlentities($lastname);
-            $firstname = htmlentities($firstname);
-            $password = password_hash($password, PASSWORD_BCRYPT);
-            $this->user->insertUser($email, $password, $lastname, $firstname);
-            //on appelle la fonction qui ajoute l'utilisateur à la bdd
+        $this->ensureIsNotConnected();
+        //on regarde si le formulaire a été  validé
+        if (isset($_POST['button-signup'])) {
+            //on verifie si aucun user existe pour ce mail
+            $email = htmlentities($_POST['email']);
+            if ($this->user->ensureUserExist($email) === false) {
+                if ($_POST['password'] === $_POST['confirmedPassword']) {
+                    //on filtre nos données et crypte le mdp
+                    $lastname = htmlentities($_POST['lastname']);
+                    $firstname = htmlentities($_POST['firstname']);
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-        } else {
-            echo MessageService::getMessage(MessageService::ALERT_DANGER,
-                "Un compte est déja lié a cet email !!");
+                    //on appelle la fonction qui ajoute l'utilisateur à la bdd
+                    $this->user->insertUser($email, $password, $lastname, $firstname);
+
+                    //on recupere l'id pour cet utilisateur
+                    $id = $this->user->getIdByEmail($email);
+
+                    //on affecte no variable de session
+                    $_SESSION['status'] = true;
+                    $_SESSION['user_id'] = $id;
+                    $_SESSION['email'] = $email;
+
+                    //on redirige a la page d'accueil
+                    header("Location: ./home");
+                } else {
+                    echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                        "Les mots de passe ne correspondent pas !");
+                }
+            } else {
+                echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                    "Un compte est déja lié a cet email !!");
+            }
         }
     }
 
