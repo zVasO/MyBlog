@@ -28,6 +28,9 @@ switch ($_SERVER['QUERY_STRING']) {
     case "/register":
         (new LogInController())->showRegisterPage();
         break;
+    case "/signout":
+        (new LogInController())->signOut();
+        break;
     default:
         (new HomeController())->showHome();
 }

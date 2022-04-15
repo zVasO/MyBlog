@@ -32,4 +32,12 @@ class LogInController
         $this->userService->register("test@admin.com", "motdepasse", "ADMIN", "ADMIN");
     }
 
+    public function signOut()
+    {
+        //on vide nos variables de session liées a la connexion
+        $this->userService->signOut();
+        //on renvoie a la page d'accueil
+        header("Location: ./home");
+    }
+
 }

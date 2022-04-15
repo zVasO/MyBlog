@@ -37,7 +37,6 @@ class HomeController
             "articles" => $this->articles->getArticlesByNumber(self::HOME_ARTICLES_NUMBER),
             "comments" => $this->comments,
             "session" => $_SESSION
-
         ]);
     }
 }

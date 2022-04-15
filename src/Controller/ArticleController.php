@@ -25,7 +25,6 @@ class ArticleController
         $this->twig = TwigService::getInstance();
         $this->articles = new ArticleModel();
         $this->comment = new CommentModel();
-        $this->blog =  new BlogController();
         $this->form = new CommentService();
     }
 
@@ -46,7 +45,7 @@ class ArticleController
                 "session" => $_SESSION
             ]);
         } else {
-            $this->blog->showBlog();
+            header("Location: ./blog");
         }
 
     }

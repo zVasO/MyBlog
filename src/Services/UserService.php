@@ -36,7 +36,7 @@ class UserService
                     $_SESSION['status'] = true;
                     $_SESSION['user_id'] = $result->id;
                     $_SESSION['email'] = $result->email;
-
+                    header("Location: ./home");
                 } else {
                     echo MessageService::getMessage(MessageService::ALERT_DANGER,
                         "Mauvais mot de passe !");
@@ -45,9 +45,6 @@ class UserService
                 echo MessageService::getMessage(MessageService::ALERT_DANGER,
                     "Aucun compte ne correspond à cette addresse email !");
             }
-        } else {
-            echo MessageService::getMessage(MessageService::ALERT_DANGER,
-                "Veuillez remplir le formulaire correctement");
         }
     }
 
@@ -78,7 +75,7 @@ class UserService
 
     private function ensureIsNotConnected()
     {
-        if ($_SESSION['status'] === true) {
+        if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
             header("Location:./home");
         }
     }
