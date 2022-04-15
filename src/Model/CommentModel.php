@@ -21,13 +21,13 @@ class CommentModel
         return $this->database->getPdo()->query('SELECT * FROM comment', PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
     }
 
-    public function getCommentById(int $id)
+    public function getAllPublishedCommentByArticleId(int $id)
     {
-        return $this->database->getPdo()->query("SELECT * FROM comment WHERE id = $id", PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
+        return $this->database->getPdo()->query("SELECT comment.* FROM comment, article WHERE article.id = $id AND comment.article_id = $id AND comment.status = 'published'", PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
     }
     public function getNumberOfCommentsByArticle(int $id)
     {
-        $request = $this->database->getPdo()->query("SELECT count(*) as number FROM `comment`, `article` WHERE article.id = $id AND comment.article_id = $id", PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
+        $request = $this->database->getPdo()->query("SELECT count(*) as number FROM `comment`, `article` WHERE article.id = $id AND comment.article_id = $id AND comment.status = 'published'", PDO::FETCH_CLASS, CommentModel::class)->fetchAll();
 
         if ($request != false)
         {
@@ -35,5 +35,6 @@ class CommentModel
         } else {
             return 0;
         }
+
     }
 }
