@@ -17,7 +17,7 @@ class ArticleModel
 
     public function getAllArticles(): bool|array
     {
-        return $this->database->getPdo()->query('SELECT * FROM article', PDO::FETCH_CLASS, ArticleModel::class)->fetchAll();
+            return $this->database->getPdo()->query('SELECT * FROM article', PDO::FETCH_CLASS, ArticleModel::class)->fetchAll();
     }
     public function getArticlesByNumber(int $numberOfArticles)
     {
