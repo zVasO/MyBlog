@@ -47,7 +47,7 @@ class UserService
             $lastname = htmlentities($lastname);
             $firstname = htmlentities($firstname);
             $password = password_hash($password, PASSWORD_BCRYPT);
-
+            $this->user->insertUser($email, $password, $lastname, $firstname);
             //on appelle la fonction qui ajoute l'utilisateur à la bdd
 
         } else {

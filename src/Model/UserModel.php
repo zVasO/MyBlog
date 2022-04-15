@@ -24,6 +24,6 @@ class UserModel
     }
     public function insertUser(string $email, string $password, string $lastname, string $firstname)
     {
-        return $this->database->getPdo()->query("INSERT INTO user (email, password, lastname, firstname, created_at) VALUES ('" . $email . "','" . $password . "', '" . $lastname . "', '" . $firstname . "',  NOW())");
+        return $this->database->getPdo()->query("INSERT INTO user (email, password, lastname, firstname, created_at, Role_id) VALUES ('" . $email . "','" . $password . "', '" . $lastname . "', '" . $firstname . "',  NOW(), 1)");
     }
 }

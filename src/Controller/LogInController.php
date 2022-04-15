@@ -18,7 +18,7 @@ class LogInController
 
     public function showLoginPage()
     {
-        $this->userService->logIn("dev.dyger@gmail.com", "motdepasse");
+        $this->userService->register("test@admin.com", "motdepasse", "ADMIN", "ADMIN");
     }
 
 }
