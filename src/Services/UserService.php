@@ -33,7 +33,11 @@ class UserService
                     $_SESSION['status'] = true;
                     $_SESSION['user_id'] = $result->id;
                     $_SESSION['email'] = $result->email;
-
+                    $_SESSION['role'] = $result->Role_id;
+                    $_SESSION['lastname'] = $result->lastname;
+                    $_SESSION['firstname'] = $result->firstname;
+                    //on redirige sur la page d'accueil
+                    header("Location: ./home");
                 } else {
                     echo MessageService::getMessage(MessageService::ALERT_DANGER,
                         "Mauvais mot de passe !");
