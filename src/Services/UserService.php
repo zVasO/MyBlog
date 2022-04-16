@@ -92,6 +92,9 @@ class UserService
         unset($_SESSION['user_id']);
         unset($_SESSION['email']);
         unset($_SESSION['status']);
+        unset($_SESSION['role']);
+        unset($_SESSION['lastname']);
+        unset($_SESSION['firstname']);
     }
 
     private function ensureIsNotConnected()
