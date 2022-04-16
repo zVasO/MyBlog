@@ -73,6 +73,11 @@ class UserService
                     $_SESSION['status'] = true;
                     $_SESSION['user_id'] = $id;
                     $_SESSION['email'] = $email;
+                    //le role lors de la création d'un compte est 1 soit user
+                    $_SESSION['role'] = 1;
+                    $_SESSION['lastname'] = $lastname;
+                    $_SESSION['firstname'] = $firstname;
+
 
                     //on redirige a la page d'accueil
                     header("Location: ./home");
