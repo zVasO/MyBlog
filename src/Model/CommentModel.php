@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Model;
 
 use App\Services\DatabaseService;
-use DateTime;
 use PDO;
 
 class CommentModel
@@ -51,8 +50,29 @@ class CommentModel
         $this->database->getPdo()->query("INSERT INTO comment (content, User_id, status, article_id, createdAt) VALUES ('" . $comment . "', '" . $userId . "', '" . $status . "', '" . $articleId . "' , NOW())");
     }
 
+
+    public function countTotalComments(): null|int
+    {
+        $query = "SELECT COUNT(*) as total FROM comment";
+        $result = $this->getPdo()->query($query)->fetchObject();
+        if ($result === false) {
+            return null;
+        }
+        return $result->total;
+    }
+
     private function getPdo(): PDO
     {
         return $this->database->getPdo();
+    }
+
+    public function countTotalPendingComments(): null|int
+    {
+        $query = "SELECT COUNT(*) as total FROM comment WHERE status = 1";
+        $result = $this->getPdo()->query($query)->fetchObject();
+        if ($result === false) {
+            return null;
+        }
+        return $result->total;
     }
 }

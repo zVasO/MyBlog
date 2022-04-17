@@ -27,4 +27,22 @@ class ArticleModel
     {
         return $this->database->getPdo()->query("SELECT * FROM article WHERE id = $idArticle", PDO::FETCH_CLASS, ArticleModel::class)->fetch();
     }
+    public function countTotalArticles(): null|int
+    {
+        $query = "SELECT COUNT(*) as total FROM article";
+        $result = $this->database->getPdo()->query($query)->fetchObject();
+        if ($result === false) {
+            return null;
+        }
+        return $result->total;
+    }
+    public function countTotalPendingArticles(): null|int
+    {
+        $query = "SELECT COUNT(*) as total FROM article WHERE status = 1";
+        $result = $this->database->getPdo()->query($query)->fetchObject();
+        if ($result === false) {
+            return null;
+        }
+        return $result->total;
+    }
 }

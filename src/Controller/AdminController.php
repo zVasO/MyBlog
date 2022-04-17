@@ -27,10 +27,13 @@ class AdminController
 
     public function showDashboard()
     {
-        //todo donner les nombres d'inscrit, d'articles, de commentaires et de commentaire en attente
         echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
             "session" => $_SESSION,
-            "totalUsers" => $this->users->countTotalUsers()
+            "totalUsers" => $this->users->countTotalUsers(),
+            "totalArticles" => $this->articles->countTotalArticles(),
+            "totalPendingArticles" => $this->articles->countTotalPendingArticles(),
+            "totalComments" => $this->comments->countTotalComments(),
+            "totalPendingComments" => $this->comments->countTotalPendingComments()
         ]);
     }
 
