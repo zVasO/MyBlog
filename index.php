@@ -35,6 +35,12 @@ switch ($_SERVER['QUERY_STRING']) {
     case "/admin":
         (new AdminController())->showDashboard();
         break;
+    case "/admin/articles":
+        (new AdminController())->showArticlesManagementPage();
+        break;
+    case "/admin/comments":
+        (new AdminController())->showCommentsManagementPage();
+        break;
     default:
         (new HomeController())->showHome();
 }

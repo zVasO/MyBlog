@@ -22,4 +22,18 @@ class AdminController
             "session" => $_SESSION
         ]);
     }
+
+    public function showArticlesManagementPage()
+    {
+        echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
+            "session" => $_SESSION
+        ]);
+    }
+
+    public function showCommentsManagementPage()
+    {
+        echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
+            "session" => $_SESSION
+        ]);
+    }
 }
