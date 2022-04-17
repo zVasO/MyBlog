@@ -2,6 +2,7 @@
 session_start();
 require 'vendor/autoload.php';
 
+use App\Controller\AdminController;
 use App\Controller\ArticleController;
 use App\Controller\BlogController;
 use App\Controller\HomeController;
@@ -30,6 +31,9 @@ switch ($_SERVER['QUERY_STRING']) {
         break;
     case "/signout":
         (new LogInController())->signOut();
+        break;
+    case "/admin":
+        (new AdminController())->showDashboard();
         break;
     default:
         (new HomeController())->showHome();
