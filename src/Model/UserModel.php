@@ -35,4 +35,13 @@ class UserModel
         return $result->id;
 
     }
+    public function countTotalUsers()
+    {
+        $result = $this->database->getPdo()->query("SELECT COUNT(*) as total FROM user")->fetchObject();
+        if ($result === false) {
+            return null;
+        }
+        return $result->total;
+    }
+
 }

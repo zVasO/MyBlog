@@ -1,0 +1,61 @@
+{% extends "/admin/template.html.twig" %}
+{%  block main %}
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Infos Rapide</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Portfolio Grid Items-->
+            <div class="row justify-content-start">
+                <div class="card border-secondary mb-3 mx-1" style="max-width: 19rem;">
+                    <div class="card-body">
+                       <div class="d-flex flex-row align-items-center gap-4">
+                           <i class="fa fa-user fa-3x" aria-hidden="true"></i>
+                           <p class="card-text">Le site contient actuellement <strong>{{ totalUsers }}</strong> utilisateurs</p>
+                       </div>
+                    </div>
+                </div>
+                <div class="card border-success mb-3 mx-1" style="max-width: 19rem;">
+                    <div class="card-body">
+                        <div class="d-flex flex-row align-items-center gap-4">
+                            <i class="fa-solid fa-newspaper fa-3x" aria-hidden="true"></i>
+                            <p class="card-text">Le site contient actuellement <strong>{{ totalArticles }}</strong> articles</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-warning mb-3 mx-1" style="max-width: 19rem;">
+                    <div class="card-body">
+                        <div class="d-flex flex-row align-items-center gap-4">
+                            <i class="fa-solid fa-pen-to-square fa-3x" aria-hidden="true"></i>
+                            <p class="card-text">Il y a <strong>{{ totalPendingArticles }}</strong> articles en attente de publication</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-success mb-3 mx-1" style="max-width: 19rem;">
+                    <div class="card-body">
+                        <div class="d-flex flex-row align-items-center gap-4">
+                            <i class="fa-solid fa-comment fa-3x" aria-hidden="true"></i>
+                            <p class="card-text">Le site contient actuellement <strong>{{ totalComments }}</strong> commentaires</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-warning mb-3 mx-1" style="max-width: 19rem;">
+                    <div class="card-body">
+                        <div class="d-flex flex-row align-items-center gap-4">
+                            <i class="fa-solid fa-pen-to-square fa-3x" aria-hidden="true"></i>
+                            <p class="card-text">Il y a <strong>{{ totalPendingComments }}</strong> commentaires en attente de publication</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
