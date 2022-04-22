@@ -4,7 +4,7 @@
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="..." />
+        <img class="masthead-avatar mb-5" src="public/assets/img/avataaars.svg" alt="..." />
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0">GERMANN Dylan</h1><br>
         <h4 class=" text-uppercase mb-0">Le développeur qu'il vous faut !</h4>
@@ -34,9 +34,11 @@
             {%  for article in articles %}
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="portfolio-item mx-auto">
-                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                    </div>
+                    <a href="{{ "./article?id=" ~ article.id }}">
+                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                        </div>
+                    </a>
                     <h2>{{ article.title }}</h2><br>
                     <p><span>{{ article.header }}</span></p>
                     <div style="display: flex; justify-content: space-between">

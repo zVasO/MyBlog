@@ -35,7 +35,8 @@ class HomeController
 
         echo $this->twig->getTwig()->render("home.html.twig", [
             "articles" => $this->articles->getArticlesByNumber(self::HOME_ARTICLES_NUMBER),
-            "comments" => $this->comments
+            "comments" => $this->comments,
+            "session" => $_SESSION
         ]);
     }
 }

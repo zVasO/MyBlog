@@ -24,7 +24,9 @@ class BlogController
     {
         echo $this->twig->getTwig()->render("blog.html.twig", [
             "articles" => $this->articles->getAllArticles(),
-            "comments" => $this->comments
+            "comments" => $this->comments,
+            "session" => $_SESSION
+
         ]);
     }
 }
