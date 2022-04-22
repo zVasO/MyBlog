@@ -29,7 +29,10 @@ class LogInController
 
     public function showRegisterPage()
     {
-        $this->userService->register("test@admin.com", "motdepasse", "ADMIN", "ADMIN");
+        echo $this->twig->getTwig()->render("register.html.twig", [
+            "user" =>  $this->userService,
+            "session" => $_SESSION
+        ]);
     }
 
     public function signOut()

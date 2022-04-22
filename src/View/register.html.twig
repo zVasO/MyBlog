@@ -14,6 +14,16 @@
             <!-- Portfolio Grid Items-->
             <form action="" method="post">
                 <div class="form-group">
+                    <label for="exampleInputEmail1">Nom</label>
+                    <input type="text" class="form-control" name="lastname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre nom" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Prénom</label>
+                    <input type="text" class="form-control" name="firstname" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre prénom" required>
+                </div>
+                <br>
+                <div class="form-group">
                     <label for="exampleInputEmail1">Adresse email</label>
                     <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez votre email" required>
                 </div>
@@ -22,12 +32,17 @@
                     <label for="exampleInputPassword1">Mot de passe</label>
                     <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Entrez votre mot de passe" required>
                 </div>
-                <button type="submit" name="button-login" class="btn btn-primary mt-2">Connexion</button>
+                <br>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Confirmez votre mot de passe</label>
+                    <input type="password" class="form-control" name="confirmedPassword" id="exampleInputPassword1" placeholder="Confirmez votre mot de passe" required>
+                </div>
+                <button type="submit" name="button-signup" class="btn btn-primary mt-2">S'inscrire</button>
             </form>
-            {{ user.logIn }}
+            {{ user.register }}
             <div>
-                <span>Vous ne possédez pas de compte ?</span><br>
-                <a href="./register">Inscrivez-vous</a>
+                <span>Vous possédez déja un compte ?</span><br>
+                <a href="./login">Connectez-vous</a>
             </div>
         </div>
     </section>

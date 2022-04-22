@@ -26,4 +26,13 @@ class UserModel
     {
         return $this->database->getPdo()->query("INSERT INTO user (email, password, lastname, firstname, created_at, Role_id) VALUES ('" . $email . "','" . $password . "', '" . $lastname . "', '" . $firstname . "',  NOW(), 1)");
     }
+    public function getIdByEmail(string $email)
+    {
+        $result = $this->database->getPdo()->query("SELECT id FROM user WHERE email = '" . $email . "'")->fetchObject();
+        if ($result === false) {
+            return null;
+        }
+        return $result->id;
+
+    }
 }
