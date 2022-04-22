@@ -4,7 +4,11 @@ require 'vendor/autoload.php';
 
 use App\Services\RouterService;
 
-RouterService::navigate();
+try {
+    RouterService::navigate();
+} catch (Exception $e) {
+    echo $e;
+}
 
 
 

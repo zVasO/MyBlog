@@ -18,7 +18,10 @@ class UserService
         $this->error = [];
     }
 
-    public function logIn()
+    /**
+     * @return void
+     */
+    public function logIn(): void
     {
         $this->ensureIsNotConnected();
         if (isset($_POST['button-login'])) {
@@ -49,7 +52,20 @@ class UserService
         }
     }
 
-    public function register()
+    /**
+     * @return void
+     */
+    private function ensureIsNotConnected(): void
+    {
+        if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
+            header("Location:./home");
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function register(): void
     {
         $this->ensureIsNotConnected();
         //on regarde si le formulaire a été  validé
@@ -92,7 +108,10 @@ class UserService
         }
     }
 
-    public function signOut()
+    /**
+     * @return void
+     */
+    public function signOut(): void
     {
         unset($_SESSION['user_id']);
         unset($_SESSION['email']);
@@ -100,13 +119,6 @@ class UserService
         unset($_SESSION['role']);
         unset($_SESSION['lastname']);
         unset($_SESSION['firstname']);
-    }
-
-    private function ensureIsNotConnected()
-    {
-        if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
-            header("Location:./home");
-        }
     }
 
 }
