@@ -78,17 +78,17 @@ class ArticleEntity
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): string
     {
         return $this->createdAt;
     }
 
     /**
-     * @return DateTime
+     * @return string
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): string
     {
         return $this->updatedAt;
     }
