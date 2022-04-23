@@ -10,7 +10,7 @@ class CommentEntity
 {
     private int $id;
     private string $content;
-    private string $createdAt;
+    private DateTime $createdAt;
     private int $userId;
     private int $articleId;
     private string $status;
@@ -25,7 +25,7 @@ class CommentEntity
             $this->content = $value;
         }
         if ($name === "createdAt") {
-            $this->createdAt = (new DateTime($value))->format('d/m/Y');
+            $this->createdAt = new DateTime($value);
         }
         if ($name === "User_id") {
             $this->userId = $value;
@@ -55,9 +55,9 @@ class CommentEntity
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getCreatedAt(): string
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }

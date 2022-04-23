@@ -12,8 +12,8 @@ class ArticleEntity
     private string $title;
     private string $header;
     private string $content;
-    private string $createdAt;
-    private string $updatedAt;
+    private DateTime $createdAt;
+    private DateTime $updatedAt;
     private int $userId;
     private string $status;
 
@@ -32,10 +32,10 @@ class ArticleEntity
             $this->content = $value;
         }
         if ($name === "created_at") {
-            $this->createdAt = (new DateTime($value))->format('d/m/Y');
+            $this->createdAt = new DateTime($value);
         }
         if ($name === "updated_at") {
-            $this->updatedAt = (new DateTime($value))->format('d/m/Y');
+            $this->updatedAt = new DateTime($value);
         }
         if ($name === "User_id") {
             $this->userId = $value;
@@ -78,17 +78,17 @@ class ArticleEntity
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getCreatedAt(): string
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
