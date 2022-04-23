@@ -12,6 +12,7 @@ class BlogController
 
     private TwigService $twig;
     private ArticleModel $articles;
+    const BASE_URL = "/blog";
 
     public function __construct()
     {

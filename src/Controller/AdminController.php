@@ -16,6 +16,10 @@ class AdminController
     private ArticleModel $articles;
     private UserModel $users;
     private CommentModel $comments;
+    public const BASE_URL = "/admin";
+    public const COMMENTS_URL = "/admin/comments";
+    public const ARTICLES_URL = "/admin/articles";
+
 
     public function __construct()
     {

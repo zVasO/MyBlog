@@ -12,6 +12,9 @@ class LogInController
 
     private UserService $userService;
     private TwigService $twig;
+    const LOGIN_URL = "/login";
+    const REGISTER_URL = "/register";
+    const SIGNOUT_URL = "/signout";
 
     public function __construct()
     {

@@ -48,25 +48,25 @@ class RouterService
             case ArticleController::BASE_URL :
                 (new ArticleController())->showArticle($id);
                 break;
-            case "/blog":
+            case BlogController::BASE_URL:
                 (new BlogController())->showBlog();
                 break;
-            case "/login":
+            case LogInController::LOGIN_URL:
                 (new LogInController())->showLoginPage();
                 break;
-            case "/register":
+            case LogInController::REGISTER_URL:
                 (new LogInController())->showRegisterPage();
                 break;
-            case "/signout":
+            case LogInController::SIGNOUT_URL:
                 (new LogInController())->signOut();
                 break;
-            case "/admin":
+            case AdminController::BASE_URL:
                 (new AdminController())->showDashboard();
                 break;
-            case "/admin/articles":
+            case AdminController::ARTICLES_URL:
                 (new AdminController())->showArticlesManagementPage();
                 break;
-            case "/admin/comments":
+            case AdminController::COMMENTS_URL:
                 (new AdminController())->showCommentsManagementPage();
                 break;
             case "/comment":
