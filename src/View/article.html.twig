@@ -23,20 +23,19 @@
             <div class="row justify-content-center">
                 <h2>Commentaires: </h2><br><br>
 
-                <form action="" method="post">
+                <form action="/comment" method="post">
                     <textarea name="comment" id="" style="width: 100%; min-height:200px;margin-bottom: 10px"></textarea>
                     <input type="submit" name="btn-comment" class="btn btn-primary" value="Ajouter">
                 </form>
-                {{ form.addComment(article.id) }}
+                {#  {{ form.addComment(article.id) }} #}
                 {{ form.getMessage|raw }}
-                
                 {% for comment in comments %}
                     <div>
-                        <h6>Par {{ comment.User_id }} :</h6>
+                        <h6>Par {{ comment.userId }} :</h6>
                         <p>
                             {{ comment.content }}
                             <br>
-                            <span>Crée le {{ comment.created_at|date("d/m/Y") }} par </span>
+                            <span>Crée le {{ comment.createdAt|date("d/m/Y") }}</span>
                         </p>
                     </div>
                     <br>

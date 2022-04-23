@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use App\Entity\CommentEntity;
 use App\Services\DatabaseService;
 use JetBrains\PhpStorm\Pure;
 use PDO;
@@ -37,7 +38,7 @@ class CommentModel
 
     /**
      * @param int $id
-     * @return array
+     * @return CommentEntity[]
      */
     public function getAllPublishedCommentByArticleId(int $id): array
     {
@@ -45,7 +46,7 @@ class CommentModel
         $result = $this->database->getPdo()
             ->query($query,
                 PDO::FETCH_CLASS,
-                CommentModel::class
+                CommentEntity::class
             )->fetchAll();
         if ($result === false) {
             return [];
