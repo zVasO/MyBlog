@@ -26,7 +26,22 @@ class UserModel
     public function getUserByEmail(string $email): mixed
     {
         $query = "SELECT * FROM user WHERE email = '" . $email . "'";
-        return $this->database->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetchAll();
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
+        if ($result === false) {
+            return null;
+        }
+        return $result;
+    }
+
+    public function getUserById(int $id)
+    {
+        $query = "SELECT * FROM user WHERE id = '" . $id . "'";
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
+        if ($result === false) {
+            return null;
+        }
+        return $result;
+
     }
 
     /**
@@ -36,7 +51,7 @@ class UserModel
     public function ensureUserExist(string $email): mixed
     {
         $query = "SELECT * FROM user WHERE email = '" . $email . "'";
-        $result = $this->database->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetchAll();
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
         if ($result === false) {
             return null;
         }
@@ -54,7 +69,7 @@ class UserModel
     {
         $query = "INSERT INTO user (email, password, lastname, firstname, created_at, Role_id) 
             VALUES ('" . $email . "','" . $password . "', '" . $lastname . "', '" . $firstname . "',  NOW(), 1)";
-        $this->database->getPdo()->query($query);
+        $this->getPdo()->query($query);
     }
 
     /**
@@ -64,7 +79,7 @@ class UserModel
     public function getIdByEmail(string $email): null|int
     {
         $query = "SELECT id FROM user WHERE email = '" . $email . "'";
-        $result = $this->database->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetchAll();
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
         if ($result === false) {
             return null;
         }
@@ -78,7 +93,7 @@ class UserModel
     public function countTotalUsers(): int|null
     {
         $query = "SELECT COUNT(*) as total FROM user";
-        $result = $this->getPdo()->query($query)->fetch();
+        $result = $this->getPdo()->query($query)->fetchObject();
         if ($result === false) {
             return null;
         }

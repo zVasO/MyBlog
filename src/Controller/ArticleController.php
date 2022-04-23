@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Model\ArticleModel;
 use App\Model\CommentModel;
+use App\Model\UserModel;
 use App\Services\CommentService;
 use App\Services\TwigService;
 use Twig\Error\LoaderError;
@@ -26,6 +27,7 @@ class ArticleController
         $this->articles = new ArticleModel();
         $this->comment = new CommentModel();
         $this->form = new CommentService();
+        $this->user = new UserModel();
     }
 
     /**
@@ -42,6 +44,7 @@ class ArticleController
                 "article" => $this->articles->getArticleById($idArticle),
                 "comments" => $this->comment->getAllPublishedCommentByArticleId($idArticle),
                 "form" => $this->form,
+                "user" => $this->user,
                 "session" => $_SESSION
             ]);
         } else {

@@ -65,7 +65,7 @@ class CommentModel
             ->query($query,
                 PDO::FETCH_CLASS,
                 CommentModel::class
-            )->fetchObject();
+            )->fetch();
         if ($result === false) {
             return 0;
         }

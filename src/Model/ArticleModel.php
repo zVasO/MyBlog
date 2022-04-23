@@ -21,12 +21,12 @@ class ArticleModel
     /**
      * @return bool|array|null
      */
-    public function getAllArticles(): bool|array|null
+    public function getAllArticles(): bool|array
     {
         $query = 'SELECT * FROM article';
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
         if ($result === false) {
-            return null;
+            return [];
         }
         return $result;
     }
@@ -35,12 +35,12 @@ class ArticleModel
      * @param int $numberOfArticles
      * @return array|null
      */
-    public function getArticlesByNumber(int $numberOfArticles): array|null
+    public function getArticlesByNumber(int $numberOfArticles): array
     {
         $query = "SELECT * FROM article LIMIT $numberOfArticles";
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
         if ($result === false) {
-            return null;
+            return [];
         }
         return $result;
     }

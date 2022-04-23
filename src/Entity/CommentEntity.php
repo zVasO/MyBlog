@@ -24,7 +24,7 @@ class CommentEntity
         if ($name === "content") {
             $this->content = $value;
         }
-        if ($name === "createdAt") {
+        if ($name === "created_at") {
             $this->createdAt = new DateTime($value);
         }
         if ($name === "User_id") {

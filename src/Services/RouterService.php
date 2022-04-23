@@ -69,10 +69,11 @@ class RouterService
             case "/admin/comments":
                 (new AdminController())->showCommentsManagementPage();
                 break;
-            case "comment/":
+            case "/comment":
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     //TODO faire un commentcontroller et appeler la bonne action (suppirmer, ajouter)
                 }
+                break;
             default:
                 (new HomeController())->showHome();
         }

@@ -31,14 +31,14 @@ class UserService
             $result = $this->user->getUserByEmail($email);
             if ($result !== false) {
                 //on verifie si nos mot de passe correspondent
-                if (password_verify($_POST['password'], $result->password)) {
+                if (password_verify($_POST['password'], $result->getPassword())) {
                     //on affecte nos variables de session
                     $_SESSION['status'] = true;
-                    $_SESSION['user_id'] = $result->id;
-                    $_SESSION['email'] = $result->email;
-                    $_SESSION['role'] = $result->Role_id;
-                    $_SESSION['lastname'] = $result->lastname;
-                    $_SESSION['firstname'] = $result->firstname;
+                    $_SESSION['user_id'] = $result->getId();
+                    $_SESSION['email'] = $result->getEmail();
+                    $_SESSION['role'] = $result->getRoleId();
+                    $_SESSION['lastname'] = $result->getLastname();
+                    $_SESSION['firstname'] = $result->getFirstname();
                     //on redirige sur la page d'accueil
                     header("Location: ./home");
                 } else {
