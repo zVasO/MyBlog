@@ -22,7 +22,7 @@ class LogInController
         $this->twig = TwigService::getInstance();
     }
 
-    public function showLoginPage()
+    public function showLoginPage(): void
     {
         echo $this->twig->getTwig()->render("login.html.twig", [
             "user" =>  $this->userService,
@@ -30,7 +30,7 @@ class LogInController
         ]);
     }
 
-    public function showRegisterPage()
+    public function showRegisterPage(): void
     {
         echo $this->twig->getTwig()->render("register.html.twig", [
             "user" =>  $this->userService,
@@ -38,7 +38,7 @@ class LogInController
         ]);
     }
 
-    public function signOut()
+    public function signOut(): void
     {
         //on vide nos variables de session liées a la connexion
         $this->userService->signOut();

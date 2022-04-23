@@ -30,7 +30,7 @@ class HomeController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function showHome()
+    public function showHome(): void
     {
 
         echo $this->twig->getTwig()->render("home.html.twig", [

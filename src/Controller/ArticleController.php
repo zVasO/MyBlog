@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Model\ArticleModel;
@@ -14,12 +15,12 @@ use Twig\Error\SyntaxError;
 
 class ArticleController
 {
+    const BASE_URL = "/article";
     private TwigService $twig;
     private ArticleModel $articles;
     private CommentModel $comment;
     private BlogController $blog;
     private CommentService $form;
-    const BASE_URL = "/article";
 
     public function __construct()
     {
@@ -37,7 +38,7 @@ class ArticleController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function showArticle(int $idArticle)
+    public function showArticle(int $idArticle): void
     {
         if ($this->articles->getArticleById($idArticle) !== false) {
             echo $this->twig->getTwig()->render("article.html.twig", [

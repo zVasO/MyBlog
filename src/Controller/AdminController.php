@@ -29,7 +29,7 @@ class AdminController
         $this->comments = new CommentModel();
     }
 
-    public function showDashboard()
+    public function showDashboard(): void
     {
         echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
             "session" => $_SESSION,
@@ -41,14 +41,14 @@ class AdminController
         ]);
     }
 
-    public function showArticlesManagementPage()
+    public function showArticlesManagementPage(): void
     {
         echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
             "session" => $_SESSION
         ]);
     }
 
-    public function showCommentsManagementPage()
+    public function showCommentsManagementPage(): void
     {
         echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
             "session" => $_SESSION
