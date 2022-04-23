@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use App\Entity\ArticleEntity;
 use App\Services\DatabaseService;
 use JetBrains\PhpStorm\Pure;
 use PDO;
@@ -23,7 +24,7 @@ class ArticleModel
     public function getAllArticles(): bool|array|null
     {
         $query = 'SELECT * FROM article';
-        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleModel::class)->fetchAll();
+        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
         if ($result === false) {
             return null;
         }
@@ -37,7 +38,7 @@ class ArticleModel
     public function getArticlesByNumber(int $numberOfArticles): array|null
     {
         $query = "SELECT * FROM article LIMIT $numberOfArticles";
-        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleModel::class)->fetchAll();
+        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
         if ($result === false) {
             return null;
         }
@@ -56,7 +57,7 @@ class ArticleModel
     public function getArticleById(int $idArticle): mixed
     {
         $query = "SELECT * FROM article WHERE id = $idArticle";
-        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleModel::class)->fetch();
+        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetch();
         if ($result === false) {
             return null;
         }

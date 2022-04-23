@@ -43,9 +43,6 @@ class RouterService
     public static function navigate()
     {
         $id = self::getUrlIdParameter();
-        var_dump($_POST);
-        var_dump($_SERVER);
-        //();
         //switch en fonction de l'uri, on donne la page demandée
         switch ($_SERVER['QUERY_STRING']) {
             case ArticleController::BASE_URL :

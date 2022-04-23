@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use App\Entity\ArticleEntity;
+use App\Entity\UserEntity;
 use App\Services\DatabaseService;
 use JetBrains\PhpStorm\Pure;
 use PDO;
@@ -24,7 +26,7 @@ class UserModel
     public function getUserByEmail(string $email): mixed
     {
         $query = "SELECT * FROM user WHERE email = '" . $email . "'";
-        return $this->database->getPdo()->query($query)->fetchObject();
+        return $this->database->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetchAll();
     }
 
     /**
@@ -34,7 +36,7 @@ class UserModel
     public function ensureUserExist(string $email): mixed
     {
         $query = "SELECT * FROM user WHERE email = '" . $email . "'";
-        $result = $this->database->getPdo()->query($query)->fetchObject();
+        $result = $this->database->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetchAll();
         if ($result === false) {
             return null;
         }
@@ -62,7 +64,7 @@ class UserModel
     public function getIdByEmail(string $email): null|int
     {
         $query = "SELECT id FROM user WHERE email = '" . $email . "'";
-        $result = $this->database->getPdo()->query($query)->fetchObject();
+        $result = $this->database->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetchAll();
         if ($result === false) {
             return null;
         }
@@ -76,7 +78,7 @@ class UserModel
     public function countTotalUsers(): int|null
     {
         $query = "SELECT COUNT(*) as total FROM user";
-        $result = $this->getPdo()->query($query)->fetchObject();
+        $result = $this->getPdo()->query($query)->fetch();
         if ($result === false) {
             return null;
         }
