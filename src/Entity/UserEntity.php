@@ -14,7 +14,7 @@ class UserEntity
     private string $lastname;
     private string $firstname;
     private int $roleId;
-    private DateTime $createdAt;
+    private string $createdAt;
 
     public function __set(string $name, $value): void
     {
@@ -37,7 +37,7 @@ class UserEntity
             $this->roleId = $value;
         }
         if ($name === "created_at") {
-            $this->createdAt = $value;
+            $this->createdAt = (new DateTime($value))->format('d/m/Y');
         }
     
     }

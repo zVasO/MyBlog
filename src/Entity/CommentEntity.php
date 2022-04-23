@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTime;
+
 class CommentEntity
 {
     private int $id;
@@ -23,7 +25,7 @@ class CommentEntity
             $this->content = $value;
         }
         if ($name === "createdAt") {
-            $this->createdAt = $value;
+            $this->createdAt = (new DateTime($value))->format('d/m/Y');
         }
         if ($name === "User_id") {
             $this->userId = $value;
