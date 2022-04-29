@@ -44,7 +44,6 @@ class ArticleController
             echo $this->twig->getTwig()->render("article.html.twig", [
                 "article" => $this->articles->getArticleById($idArticle),
                 "comments" => $this->comment->getAllPublishedCommentByArticleId($idArticle),
-                "form" => $this->form,
                 "user" => $this->user,
                 "session" => $_SESSION
             ]);
