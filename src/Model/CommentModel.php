@@ -135,7 +135,12 @@ class CommentModel
     }
     public function changeStatus(int $commentId, int $status): void
     {
-        $query = "UPDATE comment SET status = $status WHERE id = $commentId";
+        $query = "UPDATE comment SET status = $status+1 WHERE id = $commentId";
+        $this->database->getPdo()->query($query);
+    }
+    public function deleteComment(int $commentId): void
+    {
+        $query = "DELETE FROM comment WHERE id = $commentId";
         $this->database->getPdo()->query($query);
     }
 }

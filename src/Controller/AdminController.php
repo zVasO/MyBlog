@@ -18,6 +18,8 @@ class AdminController
     private CommentModel $comments;
     public const BASE_URL = "/admin";
     public const COMMENTS_URL = "/admin/comments";
+    public const VALIDATE_COMMENTS_URL = "/admin/comments/edit";
+    public const DELETE_COMMENTS_URL = "/admin/comments/delete";
     public const ARTICLES_URL = "/admin/articles";
 
 
@@ -54,5 +56,21 @@ class AdminController
             "session" => $_SESSION,
             "comments" => $this->comments->getAllCommentOrderedByStatus()
         ]);
+    }
+
+    public function deleteComment(int $commentId): void
+    {
+        //on supprime
+        $this->comments->deleteComment($commentId);
+        //on recharge la page
+        header("Location:".self::COMMENTS_URL);
+
+    }
+    public function validateComment(int $commentId, int $status):void
+    {
+        //on valide
+        $this->comments->changeStatus($commentId, $status);
+        //on recharge la page
+        header("Location:".self::COMMENTS_URL);
     }
 }
