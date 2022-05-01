@@ -21,6 +21,7 @@ class ArticleController
     private CommentModel $comment;
     private BlogController $blog;
     private CommentService $form;
+    private UserModel $user;
 
     public function __construct()
     {

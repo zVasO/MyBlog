@@ -81,7 +81,7 @@ class CommentModel
      */
     public function addComment(int $articleId, string $comment, int $status, int $userId): void
     {
-        $query = "INSERT INTO comment (content, User_id, status, article_id, createdAt) 
+        $query = "INSERT INTO comment (content, User_id, status, article_id, created_at) 
             VALUES ('" . $comment . "', '" . $userId . "', '" . $status . "', '" . $articleId . "' , NOW())";
         $this->database->getPdo()->query($query);
     }

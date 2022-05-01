@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Model\ArticleModel;
 use App\Model\CommentModel;
+use App\Model\UserModel;
 use App\Services\CommentService;
 use App\Services\TwigService;
 
@@ -16,6 +17,8 @@ class CommentController
     private TwigService $twig;
     private ArticleModel $articles;
     private CommentModel $comments;
+    private CommentService $commentForm;
+    private UserModel $user;
 
 
     public function __construct()
@@ -24,6 +27,8 @@ class CommentController
         $this->articles = new ArticleModel();
         $this->comments = new CommentModel();
         $this->commentForm = new CommentService();
+        $this->user = new UserModel();
+
     }
 
     /**
@@ -33,13 +38,14 @@ class CommentController
     public function addComment(int $articleId):void
     {
         //on appelle notre fonction qui ajoute ou non le commentaire
-        $this->commentForm->addComment($articleId);
+        $message = $this->commentForm->addComment($articleId);
         //on actualise la page
-        $this->twig->getTwig()->render("article.html.twig", [
-            "article" => $this->articles->getArticleById($idArticle),
-            "comments" => $this->comment->getAllPublishedCommentByArticleId($idArticle),
+        echo $this->twig->getTwig()->render("article.html.twig", [
+            "article" => $this->articles->getArticleById($articleId),
+            "comments" => $this->comments->getAllPublishedCommentByArticleId($articleId),
             "user" => $this->user,
-            "session" => $_SESSION
+            "session" => $_SESSION,
+            "message" => $message
         ]);
     }
 }
