@@ -117,4 +117,17 @@ class CommentModel
         }
         return $result->total;
     }
+
+    public function getAllCommentOrderedByStatus()
+    {
+        $query = "SELECT * FROM `comment` ORDER BY status";
+        $result = $this->getPdo()->query($query,
+            PDO::FETCH_CLASS,
+            CommentModel::class
+        )->fetchAll();
+        if ($result === false) {
+            return null;
+        }
+        return $result;
+    }
 }
