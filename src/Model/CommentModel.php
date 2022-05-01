@@ -67,7 +67,7 @@ class CommentModel
         $result = $this->getPdo()
             ->query($query,
                 PDO::FETCH_CLASS,
-                CommentModel::class
+                CommentEntity::class
             )->fetch();
         if ($result === false) {
             return 0;
@@ -126,7 +126,7 @@ class CommentModel
         $query = "SELECT * FROM `comment` ORDER BY status";
         $result = $this->getPdo()->query($query,
             PDO::FETCH_CLASS,
-            CommentModel::class
+            CommentEntity::class
         )->fetchAll();
         if ($result === false) {
             return null;

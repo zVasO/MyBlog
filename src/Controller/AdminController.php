@@ -52,7 +52,7 @@ class AdminController
     {
         echo $this->twig->getTwig()->render("admin/comment.html.twig", [
             "session" => $_SESSION,
-            "nbcomment" => 4
+            "comments" => $this->comments->getAllCommentOrderedByStatus()
         ]);
     }
 }
