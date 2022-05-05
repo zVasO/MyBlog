@@ -87,9 +87,11 @@ class AdminController
     }
     public function editArticle(int $id)
     {
-        var_dump($_POST);
-        die;
-        //$this->articles->updateArticleById($id, $_POST['title'], $_POST['header'], $_POST['content'], $_POST['status']);
+        $this->articles->updateArticleById($id, $_POST['title'], $_POST['header'], $_POST['content'], $_POST['status']);
+        echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
+            "session" => $_SESSION,
+            "article" => $this->articles->getArticleById($id),
+        ]);
     }
     public function deleteArticle(int $id)
     {

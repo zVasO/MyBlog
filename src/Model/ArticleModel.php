@@ -102,7 +102,7 @@ class ArticleModel
 
     public function updateArticleById(int $articleId, string $title, string $header, string $content, string $status): void
     {
-        $query = "UPDATE article SET title = $title, header = $header, content = $content, status = $status, updated_at = NOW()";
+        $query = "UPDATE article SET title = '".$title."', header = '".$header."', content = '".$content."', status = '".$status."', updated_at = NOW()";
         $this->getPdo()->query($query);
     }
 }
