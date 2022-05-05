@@ -80,8 +80,10 @@ class AdminController
     }
     public function editArticle(int $id)
     {
-        var_dump($id);
-        die;
+        echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
+            "session" => $_SESSION,
+            "article" => $this->articles->getArticleById($id)
+        ]);
     }
     public function deleteArticle(int $id)
     {

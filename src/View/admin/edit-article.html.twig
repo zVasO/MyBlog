@@ -1,0 +1,51 @@
+{% extends "/admin/template.html.twig" %}
+{%  block main %}
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{ article.title }}</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Portfolio Grid Items-->
+            <div class="row justify-content-center">
+                <div>
+                    <h3>{{ article.header }}</h3><br>
+                    <p>{{ article.content|nl2br }}</p>
+                    <h5>Modifié le {{ article.updatedAt|date("d/m/Y") }}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row justify-content-center">
+                {% if message is defined %}
+                    {{ message|raw }}
+                {% endif %}
+                <h2>Commentaires: </h2><br><br>
+                <form action="/add-comment?id={{ article.id }}" method="post">
+                    <textarea name="comment" id="" style="width: 100%; min-height:200px;margin-bottom: 10px"></textarea>
+                    <input type="submit" name="btn-comment" class="btn btn-primary" value="Ajouter">
+                </form>
+
+                {{ form.getMessage|raw }}
+                {% for comment in comments %}
+                    {% set commentator = user.getUserById(comment.userId) %}
+                    <div>
+                        <h6>Par {{ commentator.lastname ~ " " ~commentator.firstname }} :</h6>
+                        <p>
+                            {{ comment.content }}
+                            <br>
+                            <span>Crée le {{ comment.createdAt|date("d/m/Y") }}</span>
+                        </p>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
