@@ -21,7 +21,7 @@ class AdminController
     public const VALIDATE_COMMENTS_URL = self::COMMENTS_URL."/edit";
     public const DELETE_COMMENTS_URL = self::COMMENTS_URL."/delete";
     public const ARTICLES_URL = self::BASE_URL."/articles";
-    public const EDIT_ARTICLES_URL = self::ARTICLES_URL."/articles";
+    public const EDIT_ARTICLES_URL = self::ARTICLES_URL."/edit";
 
 
     public function __construct()
