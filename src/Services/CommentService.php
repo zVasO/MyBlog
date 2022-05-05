@@ -31,7 +31,7 @@ class CommentService
             if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
                 //on regarde si le commentaire est non null
                 if (!empty($_POST['comment'])) {
-                    $comment = htmlentities($_POST['comment']);
+                    $comment = strip_tags($_POST['comment']);
                     $status = 1;
                     $this->comment->addComment($articleId, $comment, $status, $_SESSION['user_id']);
 
