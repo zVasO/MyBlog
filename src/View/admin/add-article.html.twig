@@ -1,0 +1,12 @@
+{% extends "/admin/template.html.twig" %}
+{% block main %}
+    {% set action = "Créer" %}
+    {% set article.id =  "" %}
+    {% set article.header =  "" %}
+    {% set article.content =  "" %}
+    {% set article.status =  "waiting" %}
+    <!-- Portfolio Section-->
+    {% include 'admin/template/form-article.html.twig' %}
+{% endblock %}
+
+
