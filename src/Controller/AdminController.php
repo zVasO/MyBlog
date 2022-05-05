@@ -18,9 +18,10 @@ class AdminController
     private CommentModel $comments;
     public const BASE_URL = "/admin";
     public const COMMENTS_URL = self::BASE_URL."/comments";
-    public const VALIDATE_COMMENTS_URL = self::BASE_URL."/comments/edit";
-    public const DELETE_COMMENTS_URL = self::BASE_URL."/comments/delete";
+    public const VALIDATE_COMMENTS_URL = self::COMMENTS_URL."/edit";
+    public const DELETE_COMMENTS_URL = self::COMMENTS_URL."/delete";
     public const ARTICLES_URL = self::BASE_URL."/articles";
+    public const EDIT_ARTICLES_URL = self::ARTICLES_URL."/articles";
 
 
     public function __construct()

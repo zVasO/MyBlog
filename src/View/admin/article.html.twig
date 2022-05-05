@@ -32,7 +32,7 @@
                 <tbody>
                 {% for article in articles %}
                     <tr>
-                        <form>
+                        <form method="post" action="">
                             <td>{{ article.id }}</td>
                             <td>{{ article.title }}</td>
                             <td><p>{{ article.header|length > 150 ? article.header|raw|slice(0, 150) ~ '...' : article.header|raw }}</p></td>
