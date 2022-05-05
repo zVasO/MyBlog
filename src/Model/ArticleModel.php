@@ -89,9 +89,19 @@ class ArticleModel
         }
         return $result->total;
     }
+
+    /**
+     * @param int $articleId
+     * @return void
+     */
     public function deleteArticleById(int $articleId):void
     {
         $query = "DELETE FROM article WHERE id = $articleId";
+        $this->getPdo()->query($query);
+    }
+    public function updateArticleById(int $articleId, string $title, string $header, string $content, string $status):void
+    {
+        $query = "UPDATE article SET title = $title, header = $header, content = $content, status = $status, updated_at = NOW()";
         $this->getPdo()->query($query);
     }
 }
