@@ -80,10 +80,15 @@ class RouterService
                 (new AdminController())->deleteComment($id);
                 break;
             case AdminController::EDIT_ARTICLE_URL:
+                if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     (new AdminController())->editArticle($id);
                     break;
+                }
+                (new AdminController())->showEditArticlePage($id);
+                break;
             case AdminController::DELETE_ARTICLE_URL:
                 (new AdminController())->deleteArticle($id);
+                break;
             case CommentController::ADD_COMMENT_URL:
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     (new CommentController())->addComment($id);

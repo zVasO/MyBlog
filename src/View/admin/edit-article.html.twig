@@ -1,49 +1,52 @@
 {% extends "/admin/template.html.twig" %}
-{%  block main %}
+{% block main %}
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
-            <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{ article.title }}</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Portfolio Grid Items-->
-            <div class="row justify-content-center">
-                <div>
-                    <h3>{{ article.header }}</h3><br>
-                    <p>{{ article.content|nl2br }}</p>
-                    <h5>Modifié le {{ article.updatedAt|date("d/m/Y") }}</h5>
-                </div>
-            </div>
-            <hr>
-            <div class="row justify-content-center">
-                {% if message is defined %}
-                    {{ message|raw }}
-                {% endif %}
-                <h2>Commentaires: </h2><br><br>
-                <form action="/add-comment?id={{ article.id }}" method="post">
-                    <textarea name="comment" id="" style="width: 100%; min-height:200px;margin-bottom: 10px"></textarea>
-                    <input type="submit" name="btn-comment" class="btn btn-primary" value="Ajouter">
-                </form>
+            <form action="" method="post">
+                <!-- Portfolio Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"><input name="title"
+                                                                                                       type="text"
+                                                                                                       value="{{ article.title }}">
+                </h2>
 
-                {{ form.getMessage|raw }}
-                {% for comment in comments %}
-                    {% set commentator = user.getUserById(comment.userId) %}
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Portfolio Grid Items-->
+                <div class="justify-content-center">
                     <div>
-                        <h6>Par {{ commentator.lastname ~ " " ~commentator.firstname }} :</h6>
-                        <p>
-                            {{ comment.content }}
-                            <br>
-                            <span>Crée le {{ comment.createdAt|date("d/m/Y") }}</span>
-                        </p>
+                        <label for="header"><h3>Header: </h3></label>
+                        <textarea name="header" id="header" rows="2" style="width: 100%;"
+                                  class="mb-2">{{ article.header }}</textarea><br>
+                        <label for="content"><h3>Contenu: </h3></label>
+                        <textarea name="content" rows="10" id="content" style="width: 100%;"
+                                  class="mb-2">{{ article.content }}</textarea>
                     </div>
-                    <br>
-                {% endfor %}
-            </div>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status"
+                           id="flexRadioDefault1" {% if article.status == "waiting" %} {{ "checked" }} {% endif %}
+                           value="waiting">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        En attente
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status"
+                           id="flexRadioDefault1" {% if article.status == "published" %} {{ "checked" }} {% endif %}
+                           value="published">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Publié
+                    </label>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <input type="submit" value="Modifer" class="btn btn-primary">
+                </div>
+            </form>
         </div>
     </section>
 {% endblock %}
