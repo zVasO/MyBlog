@@ -102,7 +102,14 @@ class ArticleModel
 
     public function updateArticleById(int $articleId, string $title, string $header, string $content, string $status): void
     {
-        $query = "UPDATE article SET title = '".$title."', header = '".$header."', content = '".$content."', status = '".$status."', updated_at = NOW()";
+        $query = "UPDATE article SET title = '".$title."', header = '".$header."', content = '".$content."', status = '".$status."', updated_at = NOW() WHERE id = $articleId";
         $this->getPdo()->query($query);
+    }
+    public function createArticle(string $title, string $header, string $content, string $status, int $userId): void
+    {
+        $query = "INSERT INTO article (title, header, content, created_at, updated_at, User_id, status)
+            VALUES ('".$title."', '".$header."', '".$content."', NOW() , NOW(), '".$userId."', '".$status."')";
+        $this->getPdo()->query($query);
+
     }
 }

@@ -17,12 +17,13 @@ class AdminController
     private UserModel $users;
     private CommentModel $comments;
     public const BASE_URL = "/admin";
-    public const COMMENTS_URL = self::BASE_URL."/comments";
-    public const VALIDATE_COMMENTS_URL = self::COMMENTS_URL."/edit";
-    public const DELETE_COMMENTS_URL = self::COMMENTS_URL."/delete";
-    public const ARTICLES_URL = self::BASE_URL."/articles";
-    public const EDIT_ARTICLE_URL = self::ARTICLES_URL."/edit";
-    public const DELETE_ARTICLE_URL = self::ARTICLES_URL."/delete";
+    public const COMMENTS_URL = self::BASE_URL . "/comments";
+    public const VALIDATE_COMMENTS_URL = self::COMMENTS_URL . "/edit";
+    public const DELETE_COMMENTS_URL = self::COMMENTS_URL . "/delete";
+    public const ARTICLES_URL = self::BASE_URL . "/articles";
+    public const EDIT_ARTICLE_URL = self::ARTICLES_URL . "/edit";
+    public const DELETE_ARTICLE_URL = self::ARTICLES_URL . "/delete";
+    public const ADD_ARTICLE_URL = self::ARTICLES_URL . "/add";
 
 
     public function __construct()
@@ -49,7 +50,7 @@ class AdminController
     {
         echo $this->twig->getTwig()->render("admin/article.html.twig", [
             "session" => $_SESSION,
-            "articles"=> $this->articles->getAllArticles(),
+            "articles" => $this->articles->getAllArticles(),
             "users" => $this->users
 
         ]);
@@ -68,16 +69,18 @@ class AdminController
         //on supprime
         $this->comments->deleteComment($commentId);
         //on recharge la page
-        header("Location:".self::COMMENTS_URL);
+        header("Location:" . self::COMMENTS_URL);
 
     }
-    public function validateComment(int $commentId, int $status):void
+
+    public function validateComment(int $commentId, int $status): void
     {
         //on valide
         $this->comments->changeStatus($commentId, $status);
         //on recharge la page
-        header("Location:".self::COMMENTS_URL);
+        header("Location:" . self::COMMENTS_URL);
     }
+
     public function showEditArticlePage(int $id)
     {
         echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
@@ -85,17 +88,35 @@ class AdminController
             "article" => $this->articles->getArticleById($id)
         ]);
     }
+
     public function editArticle(int $id)
     {
-        $this->articles->updateArticleById($id, $_POST['title'], $_POST['header'], $_POST['content'], $_POST['status']);
+        $this->articles->updateArticleById($id, self::replaceAccent($_POST['title']), self::replaceAccent($_POST['header']), self::replaceAccent($_POST['content']), self::replaceAccent($_POST['status']));
         echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
             "session" => $_SESSION,
             "article" => $this->articles->getArticleById($id),
         ]);
     }
+
     public function deleteArticle(int $id)
     {
         $this->articles->deleteArticleById($id);
+        header("Location:" . self::ARTICLES_URL);
+    }
+
+    public function showAddArticlePage()
+    {
+        echo $this->twig->getTwig()->render("admin/add-article.html.twig", [
+            "session" => $_SESSION,
+        ]);
+    }
+    public function addArticle()
+    {
+        $this->articles->createArticle(self::replaceAccent($_POST['title']), self::replaceAccent($_POST['header']), self::replaceAccent($_POST['content']), self::replaceAccent($_POST['status']), $_SESSION['user_id']);
         header("Location:".self::ARTICLES_URL);
+    }
+    private function replaceAccent(string $word)
+    {
+        return str_replace("'", "\'", $word);
     }
 }
