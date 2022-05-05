@@ -31,6 +31,11 @@ class ArticleModel
         return $result;
     }
 
+    #[Pure] private function getPdo(): PDO
+    {
+        return $this->database->getPdo();
+    }
+
     /**
      * @param int $numberOfArticles
      * @return array|null
@@ -43,11 +48,6 @@ class ArticleModel
             return [];
         }
         return $result;
-    }
-
-    #[Pure] private function getPdo(): PDO
-    {
-        return $this->database->getPdo();
     }
 
     /**
@@ -94,12 +94,13 @@ class ArticleModel
      * @param int $articleId
      * @return void
      */
-    public function deleteArticleById(int $articleId):void
+    public function deleteArticleById(int $articleId): void
     {
         $query = "DELETE FROM article WHERE id = $articleId";
         $this->getPdo()->query($query);
     }
-    public function updateArticleById(int $articleId, string $title, string $header, string $content, string $status):void
+
+    public function updateArticleById(int $articleId, string $title, string $header, string $content, string $status): void
     {
         $query = "UPDATE article SET title = $title, header = $header, content = $content, status = $status, updated_at = NOW()";
         $this->getPdo()->query($query);
