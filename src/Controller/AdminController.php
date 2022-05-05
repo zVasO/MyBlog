@@ -21,7 +21,8 @@ class AdminController
     public const VALIDATE_COMMENTS_URL = self::COMMENTS_URL."/edit";
     public const DELETE_COMMENTS_URL = self::COMMENTS_URL."/delete";
     public const ARTICLES_URL = self::BASE_URL."/articles";
-    public const EDIT_ARTICLES_URL = self::ARTICLES_URL."/edit";
+    public const EDIT_ARTICLE_URL = self::ARTICLES_URL."/edit";
+    public const DELETE_ARTICLE_URL = self::ARTICLES_URL."/delete";
 
 
     public function __construct()
@@ -81,5 +82,10 @@ class AdminController
     {
         var_dump($id);
         die;
+    }
+    public function deleteArticle(int $id)
+    {
+        $this->articles->deleteArticleById($id);
+        header("Location:".self::ARTICLES_URL);
     }
 }
