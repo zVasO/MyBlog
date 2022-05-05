@@ -78,6 +78,9 @@ class RouterService
                 break;
             case AdminController::DELETE_COMMENTS_URL:
                 (new AdminController())->deleteComment($id);
+                break;
+            case AdminController::EDIT_ARTICLES_URL:
+                    (new AdminController())->editArticle($id);
             case CommentController::ADD_COMMENT_URL:
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     (new CommentController())->addComment($id);

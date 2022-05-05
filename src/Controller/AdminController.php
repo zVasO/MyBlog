@@ -77,4 +77,9 @@ class AdminController
         //on recharge la page
         header("Location:".self::COMMENTS_URL);
     }
+    public function editArticle(int $id)
+    {
+        var_dump($id);
+        die;
+    }
 }

@@ -32,21 +32,19 @@
                 <tbody>
                 {% for article in articles %}
                     <tr>
-                        <form method="post" action="article/edit">
-                            <td>{{ article.id }}</td>
-                            <td>{{ article.title }}</td>
-                            <td><p>{{ article.header|length > 150 ? article.header|raw|slice(0, 150) ~ '...' : article.header|raw }}</p></td>
-                            <td><p>{{ article.content|length > 150 ? article.content|raw|slice(0, 150) ~ '...' : article.content|raw }}</p></td>
-                            <td>
-                                {{ article.status }}
-                            </td>
-                            {% set user = users.UserById(article.userId) %}
-                            <td>{{ user.firstname ~ " " ~ user.lastname }}</td>
-                            <td>
-                                <button type="submit" style="border: none; background: none"><i class ="fa-solid fa-pen-to-square fa-xl me-2" style="margin-right: 0!important;"></i></button>
-                                <button type="button" id="delete" style="border: none; background: none" onclick="deleteConfirmation({{ article.id }})"><i class="fa-solid fa-trash fa-xl me-2" style="margin-right: 0!important;"></i></button>
-                            </td>
-                        </form>
+                        <td>{{ article.id }}</td>
+                        <td>{{ article.title }}</td>
+                        <td><p>{{ article.header|length > 150 ? article.header|raw|slice(0, 150) ~ '...' : article.header|raw }}</p></td>
+                        <td><p>{{ article.content|length > 150 ? article.content|raw|slice(0, 150) ~ '...' : article.content|raw }}</p></td>
+                        <td>
+                            {{ article.status }}
+                        </td>
+                        {% set user = users.UserById(article.userId) %}
+                        <td>{{ user.firstname ~ " " ~ user.lastname }}</td>
+                        <td>
+                            <a href="articles/edit?id={{ article.id }}"><button type="button" style="border: none; background: none"><i class ="fa-solid fa-pen-to-square fa-xl me-2" style="margin-right: 0!important;"></i></button></a>
+                            <button type="button" id="delete" style="border: none; background: none" onclick="deleteConfirmation({{ article.id }})"><i class="fa-solid fa-trash fa-xl me-2" style="margin-right: 0!important;"></i></button>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
