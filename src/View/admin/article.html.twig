@@ -1,0 +1,73 @@
+{% extends "/admin/template.html.twig" %}
+{% block main %}
+    <!-- Portfolio Section-->
+    Google
+    leaner php
+
+    Tous
+
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Gestion des
+                commentaires</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">TITRE</th>
+                    <th scope="col">CHAPÔ</th>
+                    <th scope="col">CONTENU</th>
+                    <th scope="col">CREATEUR</th>
+                    <th scope="col">ACTIONS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <th scope="row">{{ comment.id }}</th>
+                        <td>{{ comment.articleId }}</td>
+                        <td><textarea readonly name="" id="" cols="50" rows="1">{{ comment.content|raw }}</textarea></td>
+                        <td>
+                            <select class="status-select" name="status" id="comment{{ comment.id }}">
+                                <option value="1" {% if comment.status == "waiting" %} {{ "selected" }} {% endif %}>En attente de validation</option>
+                                <option value="2" {% if comment.status == "published" %} {{ "selected" }} {% endif %}>Validé</option>
+                                <option value="3" {% if comment.status == "hided" %} {{ "selected" }} {% endif %}>Refusé</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a ><i class="fa-solid fa-check fa-2x me-2"onclick="changeConfirmation({{ comment.id }})"></i></a>
+                            <a id="delete"><i class="fa-solid fa-trash fa-2x me-2" onclick="deleteConfirmation({{ comment.id }})"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        function deleteConfirmation(id) {
+            let validation;
+            validation = confirm('Confirmez la suppression ');
+            if (validation === true) {
+                document.location.href="comments/delete?id="+ id;
+            }
+        }
+        function changeConfirmation(id) {
+            let element = document.getElementById("comment"+id)
+            let status = element.options.selectedIndex
+            document.location.href="comments/edit?id=" + id + "&status="+status;
+        }
+    </script>
+{% endblock %}
+
+

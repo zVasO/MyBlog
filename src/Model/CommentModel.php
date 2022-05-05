@@ -71,9 +71,7 @@ class CommentModel
         $query = "SELECT count(*) as number FROM `comment`, `article` WHERE article.id = $id AND comment.article_id = $id AND comment.status = 'published'";
         $result = $this->getPdo()
             ->query($query,
-                PDO::FETCH_CLASS,
-                CommentEntity::class
-            )->fetch();
+            )->fetchObject();
         if ($result === false) {
             return 0;
         }

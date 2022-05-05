@@ -45,7 +45,7 @@ class AdminController
 
     public function showArticlesManagementPage(): void
     {
-        echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
+        echo $this->twig->getTwig()->render("admin/article.html.twig", [
             "session" => $_SESSION
         ]);
     }
