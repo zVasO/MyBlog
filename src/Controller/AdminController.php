@@ -81,7 +81,7 @@ class AdminController
         header("Location:" . self::COMMENTS_URL);
     }
 
-    public function showEditArticlePage(int $id)
+    public function showEditArticlePage(int $id):void
     {
         echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
             "session" => $_SESSION,
@@ -89,7 +89,7 @@ class AdminController
         ]);
     }
 
-    public function editArticle(int $id)
+    public function editArticle(int $id):void
     {
         $this->articles->updateArticleById($id, self::replaceAccent($_POST['title']), self::replaceAccent($_POST['header']), self::replaceAccent($_POST['content']), self::replaceAccent($_POST['status']));
         echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
@@ -98,24 +98,24 @@ class AdminController
         ]);
     }
 
-    public function deleteArticle(int $id)
+    public function deleteArticle(int $id):void
     {
         $this->articles->deleteArticleById($id);
         header("Location:" . self::ARTICLES_URL);
     }
 
-    public function showAddArticlePage()
+    public function showAddArticlePage():void
     {
         echo $this->twig->getTwig()->render("admin/add-article.html.twig", [
             "session" => $_SESSION,
         ]);
     }
-    public function addArticle()
+    public function addArticle():void
     {
         $this->articles->createArticle(self::replaceAccent($_POST['title']), self::replaceAccent($_POST['header']), self::replaceAccent($_POST['content']), self::replaceAccent($_POST['status']), $_SESSION['user_id']);
         header("Location:".self::ARTICLES_URL);
     }
-    private function replaceAccent(string $word)
+    private function replaceAccent(string $word):string
     {
         return str_replace("'", "\'", $word);
     }
