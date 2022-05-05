@@ -89,4 +89,9 @@ class ArticleModel
         }
         return $result->total;
     }
+    public function deleteArticleById(int $articleId):void
+    {
+        $query = "DELETE FROM article WHERE id = $articleId";
+        $this->getPdo()->query($query);
+    }
 }
