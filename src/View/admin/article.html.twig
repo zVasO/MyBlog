@@ -24,6 +24,7 @@
                     <th scope="col">TITRE</th>
                     <th scope="col">CHAPÔ</th>
                     <th scope="col">CONTENU</th>
+                    <th scope="col">STATUS</th>
                     <th scope="col">CREATEUR</th>
                     <th scope="col">ACTIONS</th>
                 </tr>
@@ -31,20 +32,21 @@
                 <tbody>
                 {% for article in articles %}
                     <tr>
-                        <th scope="row">{{ comment.id }}</th>
-                        <td>{{ comment.articleId }}</td>
-                        <td><textarea readonly name="" id="" cols="50" rows="1">{{ comment.content|raw }}</textarea></td>
-                        <td>
-                            <select class="status-select" name="status" id="comment{{ comment.id }}">
-                                <option value="1" {% if comment.status == "waiting" %} {{ "selected" }} {% endif %}>En attente de validation</option>
-                                <option value="2" {% if comment.status == "published" %} {{ "selected" }} {% endif %}>Validé</option>
-                                <option value="3" {% if comment.status == "hided" %} {{ "selected" }} {% endif %}>Refusé</option>
-                            </select>
-                        </td>
-                        <td>
-                            <a ><i class="fa-solid fa-check fa-2x me-2"onclick="changeConfirmation({{ comment.id }})"></i></a>
-                            <a id="delete"><i class="fa-solid fa-trash fa-2x me-2" onclick="deleteConfirmation({{ comment.id }})"></i></a>
-                        </td>
+                        <form>
+                            <td>{{ article.id }}</td>
+                            <td>{{ article.title }}</td>
+                            <td><p>{{ article.header|length > 150 ? article.header|raw|slice(0, 150) ~ '...' : article.header|raw }}</p></td>
+                            <td><p>{{ article.content|length > 150 ? article.content|raw|slice(0, 150) ~ '...' : article.content|raw }}</p></td>
+                            <td>
+                                {{ article.status }}
+                            </td>
+                            {% set user = users.UserById(article.userId) %}
+                            <td>{{ user.firstname ~ " " ~ user.lastname }}</td>
+                            <td>
+                                <a ><i class="fa-solid fa-pen-to-square fa-xl me-2" onclick="changeConfirmation({{ article.id }})"></i></a>
+                                <a id="delete"><i class="fa-solid fa-trash fa-xl me-2" onclick="deleteConfirmation({{ article.id }})"></i></a>
+                            </td>
+                        </form>
                     </tr>
                 {% endfor %}
                 </tbody>

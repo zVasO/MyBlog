@@ -27,7 +27,7 @@
                     <tr>
                         <th scope="row">{{ comment.id }}</th>
                         <td>{{ comment.articleId }}</td>
-                        <td><textarea readonly name="" id="" cols="50" rows="1">{{ comment.content|raw }}</textarea></td>
+                        <td><p readonly name="" id="" cols="50" rows="1">{{ comment.content|raw }}</p></td>
                         <td>
                             <select class="status-select" name="status" id="comment{{ comment.id }}">
                                 <option value="1" {% if comment.status == "waiting" %} {{ "selected" }} {% endif %}>En attente de validation</option>

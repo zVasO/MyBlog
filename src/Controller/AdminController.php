@@ -46,7 +46,10 @@ class AdminController
     public function showArticlesManagementPage(): void
     {
         echo $this->twig->getTwig()->render("admin/article.html.twig", [
-            "session" => $_SESSION
+            "session" => $_SESSION,
+            "articles"=> $this->articles->getAllArticles(),
+            "users" => $this->users
+
         ]);
     }
 
