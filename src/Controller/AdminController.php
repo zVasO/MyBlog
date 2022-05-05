@@ -91,7 +91,7 @@ class AdminController
 
     public function editArticle(int $id):void
     {
-        $this->articles->updateArticleById($id, self::replaceAccent($_POST['title']), self::replaceAccent($_POST['header']), self::replaceAccent($_POST['content']), self::replaceAccent($_POST['status']));
+        $this->articles->updateArticleById($id, strip_tags(self::replaceAccent($_POST['title'])), strip_tags(self::replaceAccent($_POST['header'])), strip_tags(self::replaceAccent($_POST['content'])), strip_tags(self::replaceAccent($_POST['status'])));
         echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
             "session" => $_SESSION,
             "article" => $this->articles->getArticleById($id),
@@ -112,7 +112,7 @@ class AdminController
     }
     public function addArticle():void
     {
-        $this->articles->createArticle(self::replaceAccent($_POST['title']), self::replaceAccent($_POST['header']), self::replaceAccent($_POST['content']), self::replaceAccent($_POST['status']), $_SESSION['user_id']);
+        $this->articles->createArticle(strip_tags(self::replaceAccent($_POST['title'])), strip_tags(self::replaceAccent($_POST['header'])), strip_tags(self::replaceAccent($_POST['content'])), strip_tags(self::replaceAccent($_POST['status'])), $_SESSION['user_id']);
         header("Location:".self::ARTICLES_URL);
     }
     private function replaceAccent(string $word):string
