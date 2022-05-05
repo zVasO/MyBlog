@@ -54,7 +54,7 @@ class ArticleModel
      * @param int $idArticle
      * @return mixed|null
      */
-    public function getArticleById(int $idArticle): mixed
+    public function getArticleById(int $idArticle): ?ArticleEntity
     {
         $query = "SELECT * FROM article WHERE id = $idArticle";
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetch();
@@ -67,7 +67,7 @@ class ArticleModel
     /**
      * @return int|null
      */
-    public function countTotalArticles(): null|int
+    public function countTotalArticles(): ?int
     {
         $query = "SELECT COUNT(*) as total FROM article";
         $result = $this->database->getPdo()->query($query)->fetchObject();
