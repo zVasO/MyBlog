@@ -33,7 +33,7 @@ class RouterService
                 return (int)$results[$parameter];
             }
         }
-        return 0;
+        return null;
     }
 
     /**
@@ -47,6 +47,7 @@ class RouterService
         //switch en fonction de l'uri, on donne la page demandée
         switch ($_SERVER['QUERY_STRING']) {
             case ArticleController::BASE_URL :
+                //TODO verifier id
                 (new ArticleController())->showArticle($id);
                 break;
             case BlogController::BASE_URL:
@@ -93,6 +94,7 @@ class RouterService
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     (new CommentController())->addComment($id);
                 }
+                (new ArticleController())->showArticle($id);
                 break;
             case AdminController::ADD_ARTICLE_URL:
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {

@@ -110,6 +110,5 @@ class ArticleModel
         $query = "INSERT INTO article (title, header, content, created_at, updated_at, User_id, status)
             VALUES ('".$title."', '".$header."', '".$content."', NOW() , NOW(), '".$userId."', '".$status."')";
         $this->getPdo()->query($query);
-
     }
 }

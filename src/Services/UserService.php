@@ -11,6 +11,7 @@ class UserService
 
     private UserModel $user;
     private array $error;
+    private const DEFAULT_ROLE = 1;
 
     public function __construct()
     {
@@ -90,7 +91,7 @@ class UserService
                     $_SESSION['user_id'] = $id;
                     $_SESSION['email'] = $email;
                     //le role lors de la création d'un compte est 1 soit user
-                    $_SESSION['role'] = 1;
+                    $_SESSION['role'] = self::DEFAULT_ROLE;
                     $_SESSION['lastname'] = $lastname;
                     $_SESSION['firstname'] = $firstname;
 

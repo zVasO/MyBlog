@@ -24,6 +24,8 @@ class TwigService
         ]);
         // On active le var_dump() de twig pour debugger
         $twig->addExtension(new DebugExtension());
+        $twig->addGlobal("session", $_SESSION);
+
         $this->twig = $twig;
     }
 
