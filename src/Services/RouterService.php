@@ -103,6 +103,13 @@ class RouterService
                 }
                 (new AdminController())->showAddArticlePage();
                 break;
+            case HomeController::BASE_CONTACT_FORM_URL:
+                if ($_SERVER['REQUEST_METHOD'] === "POST") {
+                    (new HomeController())->sendMail();
+                    break;
+                }
+                (new HomeController())->showHome();
+                break;
             default:
                 (new HomeController())->showHome();
         }
