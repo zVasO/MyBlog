@@ -21,9 +21,10 @@ class CommentService
 
     /**
      * Va verifier si le formulaire a été executé, si oui on appelle une fonction de Comment pour en ajouter un nouveau à la bdd
+     * @param int $articleId
      * @return void
      */
-    public function addComment(int $articleId)
+    public function addComment(int $articleId): void
     {
         if (isset($_POST['btn-comment'])) {
             //on regarde si l'utilisateur est connecté

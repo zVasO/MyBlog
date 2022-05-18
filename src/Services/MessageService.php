@@ -13,6 +13,9 @@ class MessageService
     const ALERT_INFO = "info";
     const ALERT_LIGHT = "light";
     const ALERT_DARK = "light";
+    const MESSAGES = [
+        self::ALERT_DANGER => "Une erreur est survenue",
+    ];
 
     public function __construct()
     {
@@ -27,6 +30,8 @@ class MessageService
      */
     public static function getMessage(string $typeAlert = null, string $message = null): string
     {
+        //todo prendre le type alert et recupere le message grace au taleau en constantes
+        //todo si message non null on garde le message au lieu de celui du tableau
         if ($message === null) {
             return '';
         }

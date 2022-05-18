@@ -18,7 +18,10 @@ class UserService
         $this->error = [];
     }
 
-    public function logIn()
+    /**
+     * @return void
+     */
+    public function logIn(): void
     {
         $this->ensureIsNotConnected();
         if (isset($_POST['button-login'])) {
@@ -28,14 +31,14 @@ class UserService
             $result = $this->user->getUserByEmail($email);
             if ($result !== false) {
                 //on verifie si nos mot de passe correspondent
-                if (password_verify($_POST['password'], $result->password)) {
+                if (password_verify($_POST['password'], $result->getPassword())) {
                     //on affecte nos variables de session
                     $_SESSION['status'] = true;
-                    $_SESSION['user_id'] = $result->id;
-                    $_SESSION['email'] = $result->email;
-                    $_SESSION['role'] = $result->Role_id;
-                    $_SESSION['lastname'] = $result->lastname;
-                    $_SESSION['firstname'] = $result->firstname;
+                    $_SESSION['user_id'] = $result->getId();
+                    $_SESSION['email'] = $result->getEmail();
+                    $_SESSION['role'] = $result->getRoleId();
+                    $_SESSION['lastname'] = $result->getLastname();
+                    $_SESSION['firstname'] = $result->getFirstname();
                     //on redirige sur la page d'accueil
                     header("Location: ./home");
                 } else {
@@ -49,7 +52,20 @@ class UserService
         }
     }
 
-    public function register()
+    /**
+     * @return void
+     */
+    private function ensureIsNotConnected(): void
+    {
+        if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
+            header("Location:./home");
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function register(): void
     {
         $this->ensureIsNotConnected();
         //on regarde si le formulaire a été  validé
@@ -92,7 +108,10 @@ class UserService
         }
     }
 
-    public function signOut()
+    /**
+     * @return void
+     */
+    public function signOut(): void
     {
         unset($_SESSION['user_id']);
         unset($_SESSION['email']);
@@ -100,13 +119,6 @@ class UserService
         unset($_SESSION['role']);
         unset($_SESSION['lastname']);
         unset($_SESSION['firstname']);
-    }
-
-    private function ensureIsNotConnected()
-    {
-        if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
-            header("Location:./home");
-        }
     }
 
 }

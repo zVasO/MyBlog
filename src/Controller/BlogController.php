@@ -12,6 +12,7 @@ class BlogController
 
     private TwigService $twig;
     private ArticleModel $articles;
+    const BASE_URL = "/blog";
 
     public function __construct()
     {
@@ -20,7 +21,7 @@ class BlogController
         $this->comments = new CommentModel();
     }
 
-    public function showBlog()
+    public function showBlog(): void
     {
         echo $this->twig->getTwig()->render("blog.html.twig", [
             "articles" => $this->articles->getAllArticles(),

@@ -1,5 +1,5 @@
 {% extends "template.html.twig" %}
-{%  block main %}
+{% block main %}
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
@@ -15,28 +15,27 @@
             <div class="row justify-content-center">
                 <div>
                     <h3>{{ article.header }}</h3><br>
-                    <p>{{ article.content|nl2br   }}</p>
-                    <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
+                    <p>{{ article.content|nl2br }}</p>
+                    <h5>Modifié le {{ article.updatedAt|date("d/m/Y") }}</h5>
                 </div>
             </div>
             <hr>
             <div class="row justify-content-center">
                 <h2>Commentaires: </h2><br><br>
-
-                <form action="" method="post">
+                <form action="/comment" method="post">
                     <textarea name="comment" id="" style="width: 100%; min-height:200px;margin-bottom: 10px"></textarea>
                     <input type="submit" name="btn-comment" class="btn btn-primary" value="Ajouter">
                 </form>
-                {{ form.addComment(article.id) }}
+                {#  {{ form.addComment(article.id) }} #}
                 {{ form.getMessage|raw }}
-                
                 {% for comment in comments %}
+                    {% set commentator = user.getUserById(comment.userId) %}
                     <div>
-                        <h6>Par {{ comment.User_id }} :</h6>
+                        <h6>Par {{ commentator.lastname ~ " " ~commentator.firstname}} :</h6>
                         <p>
                             {{ comment.content }}
                             <br>
-                            <span>Crée le {{ comment.created_at|date("d/m/Y") }} par </span>
+                            <span>Crée le {{ comment.createdAt|date("d/m/Y") }}</span>
                         </p>
                     </div>
                     <br>

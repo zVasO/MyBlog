@@ -32,24 +32,7 @@
         <!-- Portfolio Grid Items-->
         <div class="row justify-content-center">
             {%  for article in articles %}
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="portfolio-item mx-auto">
-                    <a href="{{ "./article?id=" ~ article.id }}">
-                        <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                    </a>
-                    <h2>{{ article.title }}</h2><br>
-                    <p><span>{{ article.header }}</span></p>
-                    <div style="display: flex; justify-content: space-between">
-                        <h5>Modifié le {{ article.updated_at|date("d/m/Y") }}</h5>
-                        <div class="comments" style="">
-                            <i class="fa-solid fa-comment"></i>
-                            {{ comments.NumberOfCommentsByArticle(article.id) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {% include "/template/previewArticle.html.twig" %}
             {% endfor %}
         </div>
     </div>
@@ -73,7 +56,7 @@
         <!-- About Section Button-->
         <div class="text-center mt-4">
         <div class="text-center mt-4">
-            <a class="btn btn-xl btn-outline-light" href="document/CV_GERMANN_DYLAN.pdf" download="CV_GERMANN_DYLAN">
+            <a class="btn btn-xl btn-outline-light" href="public\assets\CV_GERMANN_DYLAN.pdf" download="">
                 <i class="fas fa-download me-2"></i>
                 Télécharger mon CV
             </a>

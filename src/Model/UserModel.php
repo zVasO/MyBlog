@@ -1,8 +1,13 @@
 <?php
 declare(strict_types=1);
+
 namespace App\Model;
 
+use App\Entity\ArticleEntity;
+use App\Entity\UserEntity;
 use App\Services\DatabaseService;
+use JetBrains\PhpStorm\Pure;
+use PDO;
 
 class UserModel
 {
@@ -14,34 +19,93 @@ class UserModel
         $this->database = DatabaseService::getInstance();
     }
 
-    public function getUserByEmail(string $email)
+    /**
+     * @param string $email
+     * @return false|mixed|object
+     */
+    public function getUserByEmail(string $email): mixed
     {
-        return $this->database->getPdo()->query("SELECT * FROM user WHERE email = '" . $email . "'")->fetchObject();
+        $query = "SELECT * FROM user WHERE email = '" . $email . "'";
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
+        if ($result === false) {
+            return null;
+        }
+        return $result;
     }
-    public function ensureUserExist(string $email)
+
+    public function getUserById(int $id)
     {
-        return $this->database->getPdo()->query("SELECT * FROM user WHERE email = '" . $email . "'")->fetchObject();
+        $query = "SELECT * FROM user WHERE id = '" . $id . "'";
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
+        if ($result === false) {
+            return null;
+        }
+        return $result;
+
     }
-    public function insertUser(string $email, string $password, string $lastname, string $firstname)
+
+    /**
+     * @param string $email
+     * @return mixed|object|null
+     */
+    public function ensureUserExist(string $email): mixed
     {
-        return $this->database->getPdo()->query("INSERT INTO user (email, password, lastname, firstname, created_at, Role_id) VALUES ('" . $email . "','" . $password . "', '" . $lastname . "', '" . $firstname . "',  NOW(), 1)");
+        $query = "SELECT * FROM user WHERE email = '" . $email . "'";
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
+        if ($result === false) {
+            return null;
+        }
+        return $result;
     }
-    public function getIdByEmail(string $email)
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @param string $lastname
+     * @param string $firstname
+     * @return void
+     */
+    public function insertUser(string $email, string $password, string $lastname, string $firstname): void
     {
-        $result = $this->database->getPdo()->query("SELECT id FROM user WHERE email = '" . $email . "'")->fetchObject();
+        $query = "INSERT INTO user (email, password, lastname, firstname, created_at, Role_id) 
+            VALUES ('" . $email . "','" . $password . "', '" . $lastname . "', '" . $firstname . "',  NOW(), 1)";
+        $this->getPdo()->query($query);
+    }
+
+    /**
+     * @param string $email
+     * @return int|null
+     */
+    public function getIdByEmail(string $email): null|int
+    {
+        $query = "SELECT id FROM user WHERE email = '" . $email . "'";
+        $result = $this->getPdo()->query($query,PDO::FETCH_CLASS, UserEntity::class)->fetch();
         if ($result === false) {
             return null;
         }
         return $result->id;
 
     }
-    public function countTotalUsers()
+
+    /**
+     * @return null|int
+     */
+    public function countTotalUsers(): int|null
     {
-        $result = $this->database->getPdo()->query("SELECT COUNT(*) as total FROM user")->fetchObject();
+        $query = "SELECT COUNT(*) as total FROM user";
+        $result = $this->getPdo()->query($query)->fetchObject();
         if ($result === false) {
             return null;
         }
         return $result->total;
+    }
+
+    /**
+     * @return PDO
+     */
+    #[Pure] private function getPdo(): PDO
+    {
+        return $this->database->getPdo();
     }
 
 }
