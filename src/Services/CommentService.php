@@ -46,5 +46,6 @@ class CommentService
                     "Veuillez vous connectez pour poster un commentaire !");
             }
         }
+        die;
     }
 }

@@ -13,6 +13,9 @@ class CommentModel
 {
 
     private DatabaseService $database;
+    const STATUS_WAITING = 1;
+    const STATUS_PUBLISHED = 2;
+    const STATUS_HIDED = 1;
 
     public function __construct()
     {
@@ -116,5 +119,23 @@ class CommentModel
             return null;
         }
         return $result->total;
+    }
+
+    public function getAllCommentOrderedByStatus(): ?array
+    {
+        $query = "SELECT * FROM `comment` ORDER BY status";
+        $result = $this->getPdo()->query($query,
+            PDO::FETCH_CLASS,
+            CommentModel::class
+        )->fetchAll();
+        if ($result === false) {
+            return null;
+        }
+        return $result;
+    }
+    public function changeStatus(int $commentId, int $status): void
+    {
+        $query = "UPDATE comment SET status = $status WHERE id = $commentId";
+        $this->database->getPdo()->query($query);
     }
 }
