@@ -6,37 +6,42 @@ namespace App\Model;
 
 use App\Entity\CommentEntity;
 use App\Services\DatabaseService;
-use JetBrains\PhpStorm\Pure;
 use PDO;
 
 class CommentModel
 {
 
-    private DatabaseService $database;
     const STATUS_WAITING = 1;
     const STATUS_PUBLISHED = 2;
     const STATUS_HIDED = 1;
+    private DatabaseService $database;
 
     public function __construct()
     {
         $this->database = DatabaseService::getInstance();
     }
 
+
     /**
-     * @return array|false
+     * @return bool|array
      */
-    public function getAllComments()
+    public function getAllComments(): bool|array
     {
         $query = 'SELECT * FROM comment';
         $result = $this->getPdo()
             ->query($query,
                 PDO::FETCH_CLASS,
-                CommentModel::class
+                CommentEntity::class
             )->fetchAll();
         if ($result === false) {
             return [];
         }
         return $result;
+    }
+
+    private function getPdo(): PDO
+    {
+        return $this->database->getPdo();
     }
 
     /**
@@ -89,11 +94,10 @@ class CommentModel
         $this->database->getPdo()->query($query);
     }
 
-
     /**
      * @return int|null
      */
-    public function countTotalComments(): null|int
+    public function countTotalComments(): ?int
     {
         $query = "SELECT COUNT(*) as total FROM comment";
         $result = $this->getPdo()->query($query)->fetchObject();
@@ -103,15 +107,10 @@ class CommentModel
         return $result->total;
     }
 
-    #[Pure] private function getPdo(): PDO
-    {
-        return $this->database->getPdo();
-    }
-
     /**
      * @return int|null
      */
-    public function countTotalPendingComments(): null|int
+    public function countTotalPendingComments(): ?int
     {
         $query = "SELECT COUNT(*) as total FROM comment WHERE status = 1";
         $result = $this->getPdo()->query($query)->fetchObject();
@@ -133,11 +132,13 @@ class CommentModel
         }
         return $result;
     }
+
     public function changeStatus(int $commentId, int $status): void
     {
         $query = "UPDATE comment SET status = $status+1 WHERE id = $commentId";
         $this->database->getPdo()->query($query);
     }
+
     public function deleteComment(int $commentId): void
     {
         $query = "DELETE FROM comment WHERE id = $commentId";
