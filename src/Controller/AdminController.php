@@ -50,8 +50,9 @@ class AdminController
 
     public function showCommentsManagementPage(): void
     {
-        echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
-            "session" => $_SESSION
+        echo $this->twig->getTwig()->render("admin/comment.html.twig", [
+            "session" => $_SESSION,
+            "nbcomment" => 4
         ]);
     }
 }

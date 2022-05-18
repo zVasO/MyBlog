@@ -1,0 +1,55 @@
+{% extends "/admin/template.html.twig" %}
+{% block main %}
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Gestion des
+                commentaires</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">ID_ARTICLE</th>
+                    <th scope="col">COMMENTAIRE</th>
+                    <th scope="col">ACTIONS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in 0..nbcomment %}
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td><textarea name="" id="" cols="50" rows="1"></textarea></td>
+                        <td>
+                            <a href="/validate"><i class="fa-solid fa-check fa-2x me-2"></i></a>
+                            <a href="/hide"><i class="fa-solid fa-xmark fa-2x me-2"></i></a>
+                            <a id="delete"><i class="fa-solid fa-trash fa-2x me-2" onclick="confirmation()"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        function confirmation() {
+            let validation;
+            validation = confirm('Confirmez la suppression ');
+            if (validation === true) {
+                document.location.href="/delete"
+            }
+        }
+    </script>
+{% endblock %}
+
+
