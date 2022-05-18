@@ -124,6 +124,9 @@ class CommentModel
         return $result->total;
     }
 
+    /**
+     * @return array|null
+     */
     public function getAllCommentOrderedByStatus(): ?array
     {
         $query = "SELECT * FROM `comment` ORDER BY status";
@@ -137,12 +140,21 @@ class CommentModel
         return $result;
     }
 
+    /**
+     * @param int $commentId
+     * @param int $status
+     * @return void
+     */
     public function changeStatus(int $commentId, int $status): void
     {
         $query = "UPDATE comment SET status = $status+1 WHERE id = $commentId";
         $this->database->getPdo()->query($query);
     }
 
+    /**
+     * @param int $commentId
+     * @return void
+     */
     public function deleteComment(int $commentId): void
     {
         $query = "DELETE FROM comment WHERE id = $commentId";

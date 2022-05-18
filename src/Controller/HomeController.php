@@ -46,7 +46,13 @@ class HomeController
         ]);
     }
 
-    public function sendMail()
+    /**
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
+    public function sendMail():void
     {
         // function mail(string $to, string $subject, string $message, array|string $additional_headers, string $additional_params): bool {}
         $headers = array(

@@ -6,6 +6,9 @@ namespace App\Controller;
 
 use App\Services\TwigService;
 use App\Services\UserService;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class LogInController
 {
@@ -22,6 +25,12 @@ class LogInController
         $this->twig = TwigService::getInstance();
     }
 
+    /**
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
     public function showLoginPage(): void
     {
         echo $this->twig->getTwig()->render("login.html.twig", [
@@ -30,6 +39,12 @@ class LogInController
         ]);
     }
 
+    /**
+     * @return void
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     */
     public function showRegisterPage(): void
     {
         echo $this->twig->getTwig()->render("register.html.twig", [
@@ -38,6 +53,9 @@ class LogInController
         ]);
     }
 
+    /**
+     * @return void
+     */
     public function signOut(): void
     {
         //on vide nos variables de session liées a la connexion

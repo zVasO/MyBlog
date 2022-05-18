@@ -40,6 +40,7 @@ class RouterService
      * @throws SyntaxError
      * @throws RuntimeError
      * @throws LoaderError
+     * Permet d'appeler la fonction qui retournera la vue adéquat
      */
     public static function navigate()
     {

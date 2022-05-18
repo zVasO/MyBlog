@@ -93,6 +93,7 @@ class ArticleModel
     /**
      * @param int $articleId
      * @return void
+     * Supprimer un article par l'id
      */
     public function deleteArticleById(int $articleId): void
     {
@@ -100,6 +101,15 @@ class ArticleModel
         $this->getPdo()->query($query);
     }
 
+
+    /**
+     * @param int $articleId
+     * @param string $title
+     * @param string $header
+     * @param string $content
+     * @param string $status
+     * @return void
+     */
     public function updateArticleById(int $articleId, string $title, string $header, string $content, string $status): void
     {
         $query = "UPDATE article SET title = :title, header = :header, content = :content, status = :status, updated_at = NOW()
