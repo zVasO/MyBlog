@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Controller\AdminController;
 use App\Controller\ArticleController;
 use App\Controller\BlogController;
+use App\Controller\CommentController;
 use App\Controller\HomeController;
 use App\Controller\LogInController;
 use Twig\Error\LoaderError;
@@ -69,9 +70,9 @@ class RouterService
             case AdminController::COMMENTS_URL:
                 (new AdminController())->showCommentsManagementPage();
                 break;
-            case "/comment":
+            case CommentController::ADD_COMMENT_URL:
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
-                    //TODO faire un commentcontroller et appeler la bonne action (suppirmer, ajouter)
+                    (new CommentController())->addComment($id);
                 }
                 break;
             default:

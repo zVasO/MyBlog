@@ -22,9 +22,9 @@ class CommentService
     /**
      * Va verifier si le formulaire a été executé, si oui on appelle une fonction de Comment pour en ajouter un nouveau à la bdd
      * @param int $articleId
-     * @return void
+     * @return string
      */
-    public function addComment(int $articleId): void
+    public function addComment(int $articleId): string
     {
         if (isset($_POST['btn-comment'])) {
             //on regarde si l'utilisateur est connecté
@@ -35,14 +35,14 @@ class CommentService
                     $status = 1;
                     $this->comment->addComment($articleId, $comment, $status, $_SESSION['user_id']);
 
-                    echo MessageService::getMessage(MessageService::ALERT_SUCCESS,
+                    return MessageService::getMessage(MessageService::ALERT_SUCCESS,
                         "Félicitation, votre message a été pris en compte et est en cours de vérification !!");
                 } else {
-                    echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                    return MessageService::getMessage(MessageService::ALERT_DANGER,
                         "Veuillez remplir le champs commentaire !");
                 }
             } else {
-                echo MessageService::getMessage(MessageService::ALERT_DANGER,
+                return MessageService::getMessage(MessageService::ALERT_DANGER,
                     "Veuillez vous connectez pour poster un commentaire !");
             }
         }
