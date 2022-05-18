@@ -25,7 +25,7 @@
                 <tbody>
                 {% for comment in comments %}
                     <tr>
-                        <th scope="row">{{ comment.id }}</th>
+                        <td>{{ comment.id }}</th>
                         <td>{{ comment.articleId }}</td>
                         <td><p readonly name="" id="" cols="50" rows="1">{{ comment.content|raw }}</p></td>
                         <td>

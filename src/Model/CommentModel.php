@@ -88,8 +88,14 @@ class CommentModel
     public function addComment(int $articleId, string $comment, int $status, int $userId): void
     {
         $query = "INSERT INTO comment (content, User_id, status, article_id, created_at) 
-            VALUES ('" . $comment . "', '" . $userId . "', '" . $status . "', '" . $articleId . "' , NOW())";
-        $this->database->getPdo()->query($query);
+            VALUES (:content, :user, :status, :article , NOW())";
+        $data = [
+            'content' => $comment,
+            'user' => $userId,
+            'status' => $status,
+            'article' => $articleId
+        ];
+        $this->database->getPdo()->prepare($query)->execute($data);
     }
 
     /**
@@ -118,6 +124,9 @@ class CommentModel
         return $result->total;
     }
 
+    /**
+     * @return array|null
+     */
     public function getAllCommentOrderedByStatus(): ?array
     {
         $query = "SELECT * FROM `comment` ORDER BY status";
@@ -131,12 +140,21 @@ class CommentModel
         return $result;
     }
 
+    /**
+     * @param int $commentId
+     * @param int $status
+     * @return void
+     */
     public function changeStatus(int $commentId, int $status): void
     {
         $query = "UPDATE comment SET status = $status+1 WHERE id = $commentId";
         $this->database->getPdo()->query($query);
     }
 
+    /**
+     * @param int $commentId
+     * @return void
+     */
     public function deleteComment(int $commentId): void
     {
         $query = "DELETE FROM comment WHERE id = $commentId";

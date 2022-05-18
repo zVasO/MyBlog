@@ -9,5 +9,8 @@
   "require": {
     "twig/twig": "3.0.*",
     "ext-pdo": "*"
+  },
+  "require-dev": {
+    "symfony/dotenv": "^6.0"
   }
 }

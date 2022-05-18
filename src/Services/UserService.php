@@ -11,6 +11,7 @@ class UserService
 
     private UserModel $user;
     private array $error;
+    private const DEFAULT_ROLE = 1;
 
     public function __construct()
     {
@@ -29,7 +30,7 @@ class UserService
             $email = htmlentities($_POST['email']);
             //on recupére les infos liées a cet email dans la bdd si il existe sinon un affecte notre erreur
             $result = $this->user->getUserByEmail($email);
-            if ($result !== false) {
+            if ($result !== false && $result !== null) {
                 //on verifie si nos mot de passe correspondent
                 if (password_verify($_POST['password'], $result->getPassword())) {
                     //on affecte nos variables de session
@@ -72,7 +73,7 @@ class UserService
         if (isset($_POST['button-signup'])) {
             //on verifie si aucun user existe pour ce mail
             $email = htmlentities($_POST['email']);
-            if ($this->user->ensureUserExist($email) === false) {
+            if ($this->user->ensureUserExist($email) === false && $this->user->ensureUserExist($email) !== null) {
                 if ($_POST['password'] === $_POST['confirmedPassword']) {
                     //on filtre nos données et crypte le mdp
                     $lastname = htmlentities($_POST['lastname']);
@@ -90,7 +91,7 @@ class UserService
                     $_SESSION['user_id'] = $id;
                     $_SESSION['email'] = $email;
                     //le role lors de la création d'un compte est 1 soit user
-                    $_SESSION['role'] = 1;
+                    $_SESSION['role'] = self::DEFAULT_ROLE;
                     $_SESSION['lastname'] = $lastname;
                     $_SESSION['firstname'] = $firstname;
 

@@ -33,13 +33,14 @@ class RouterService
                 return (int)$results[$parameter];
             }
         }
-        return 0;
+        return null;
     }
 
     /**
      * @throws SyntaxError
      * @throws RuntimeError
      * @throws LoaderError
+     * Permet d'appeler la fonction qui retournera la vue adéquat
      */
     public static function navigate()
     {
@@ -47,6 +48,7 @@ class RouterService
         //switch en fonction de l'uri, on donne la page demandée
         switch ($_SERVER['QUERY_STRING']) {
             case ArticleController::BASE_URL :
+                //TODO verifier id
                 (new ArticleController())->showArticle($id);
                 break;
             case BlogController::BASE_URL:
@@ -93,6 +95,7 @@ class RouterService
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     (new CommentController())->addComment($id);
                 }
+                (new ArticleController())->showArticle($id);
                 break;
             case AdminController::ADD_ARTICLE_URL:
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
@@ -100,6 +103,13 @@ class RouterService
                     break;
                 }
                 (new AdminController())->showAddArticlePage();
+                break;
+            case HomeController::BASE_CONTACT_FORM_URL:
+                if ($_SERVER['REQUEST_METHOD'] === "POST") {
+                    (new HomeController())->sendMail();
+                    break;
+                }
+                (new HomeController())->showHome();
                 break;
             default:
                 (new HomeController())->showHome();

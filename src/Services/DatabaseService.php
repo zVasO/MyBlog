@@ -8,17 +8,12 @@ use PDO;
 class DatabaseService
 {
     private static array $instances = [];
-    private const PARAM_host = 'localhost';
-    private const PARAM_port = '3306';
-    private const PARAM_db_name = 'myblog';
-    private const PARAM_user = 'root';
-    private const PARAM_db_pass = "root";
     public PDO $pdo;
 
     public function __construct()
     {
-        $this->pdo = new PDO("mysql:host=".self::PARAM_host.';port='.self::PARAM_port.';dbname='.self::PARAM_db_name,
-            self::PARAM_user,self::PARAM_db_pass,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+        $this->pdo = new PDO("mysql:host=".$_ENV["DB_HOST"].';port='.$_ENV["DB_PORT"].';dbname='.$_ENV["DB_NAME"],
+            $_ENV["DB_USER"],$_ENV["DB_PASS"],array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     }
 
     /**
