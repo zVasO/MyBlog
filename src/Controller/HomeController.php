@@ -18,7 +18,6 @@ class HomeController
     public const BASE_CONTACT_FORM_URL = "/contact";
     private TwigService $twig;
     private ArticleModel $articles;
-    private const RECEIVER_MAIL = "tempapedro@gmail.com";
     private MessageService $message;
     private CommentModel $comments;
 
@@ -60,7 +59,7 @@ class HomeController
             'Reply-To' => $_POST['email'],
             'X-Mailer' => 'PHP/' . phpversion()
         );
-        $mail = mail(self::RECEIVER_MAIL, $_POST["subject"], $_POST["message"] . "\n téléphone : ". $_POST["phone"], $headers);
+        $mail = mail($_ENV["EMAIL_RECEIPTER"], $_POST["subject"], $_POST["message"] . "\n téléphone : ". $_POST["phone"], $headers);
         if ($mail === true) {
             $message = "Votre message a bien été envoyé !";
             $code = MessageService::ALERT_SUCCESS;
