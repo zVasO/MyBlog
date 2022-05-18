@@ -94,6 +94,13 @@ class RouterService
                     (new CommentController())->addComment($id);
                 }
                 break;
+            case AdminController::ADD_ARTICLE_URL:
+                if ($_SERVER['REQUEST_METHOD'] === "POST") {
+                    (new AdminController())->addArticle();
+                    break;
+                }
+                (new AdminController())->showAddArticlePage();
+                break;
             default:
                 (new HomeController())->showHome();
         }
