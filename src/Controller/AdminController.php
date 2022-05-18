@@ -78,11 +78,19 @@ class AdminController
         //on recharge la page
         header("Location:".self::COMMENTS_URL);
     }
-    public function editArticle(int $id)
+    public function showEditArticlePage(int $id)
     {
         echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
             "session" => $_SESSION,
             "article" => $this->articles->getArticleById($id)
+        ]);
+    }
+    public function editArticle(int $id)
+    {
+        $this->articles->updateArticleById($id, $_POST['title'], $_POST['header'], $_POST['content'], $_POST['status']);
+        echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
+            "session" => $_SESSION,
+            "article" => $this->articles->getArticleById($id),
         ]);
     }
     public function deleteArticle(int $id)
