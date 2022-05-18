@@ -23,14 +23,14 @@ class RouterService
     /**
      * @return int|null
      */
-    public static function getUrlIdParameter(): ?int
+    public static function getUrlParameter(string $parameter): ?int
     {
         //on recupere les parametre de notre url
         $components = parse_url($_SERVER['REQUEST_URI']);
         if (isset($components['query'])) {
             parse_str($components['query'], $results);
-            if (isset($results["id"])) {
-                return (int)$results["id"];
+            if (isset($results[$parameter])) {
+                return (int)$results[$parameter];
             }
         }
         return 0;
@@ -43,7 +43,7 @@ class RouterService
      */
     public static function navigate()
     {
-        $id = self::getUrlIdParameter();
+        $id = self::getUrlParameter("id");
         //switch en fonction de l'uri, on donne la page demandée
         switch ($_SERVER['QUERY_STRING']) {
             case ArticleController::BASE_URL :
@@ -70,6 +70,14 @@ class RouterService
             case AdminController::COMMENTS_URL:
                 (new AdminController())->showCommentsManagementPage();
                 break;
+            case AdminController::VALIDATE_COMMENTS_URL:
+                $status = self::getUrlParameter("status");
+                if (isset($status)) {
+                    (new AdminController())->validateComment($id, $status);
+                }
+                break;
+            case AdminController::DELETE_COMMENTS_URL:
+                (new AdminController())->deleteComment($id);
             case CommentController::ADD_COMMENT_URL:
                 if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     (new CommentController())->addComment($id);

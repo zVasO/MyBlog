@@ -67,7 +67,7 @@ class CommentModel
         $result = $this->getPdo()
             ->query($query,
                 PDO::FETCH_CLASS,
-                CommentModel::class
+                CommentEntity::class
             )->fetch();
         if ($result === false) {
             return 0;
@@ -126,7 +126,7 @@ class CommentModel
         $query = "SELECT * FROM `comment` ORDER BY status";
         $result = $this->getPdo()->query($query,
             PDO::FETCH_CLASS,
-            CommentModel::class
+            CommentEntity::class
         )->fetchAll();
         if ($result === false) {
             return null;
@@ -135,7 +135,12 @@ class CommentModel
     }
     public function changeStatus(int $commentId, int $status): void
     {
-        $query = "UPDATE comment SET status = $status WHERE id = $commentId";
+        $query = "UPDATE comment SET status = $status+1 WHERE id = $commentId";
+        $this->database->getPdo()->query($query);
+    }
+    public function deleteComment(int $commentId): void
+    {
+        $query = "DELETE FROM comment WHERE id = $commentId";
         $this->database->getPdo()->query($query);
     }
 }

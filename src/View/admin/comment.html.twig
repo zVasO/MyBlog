@@ -18,19 +18,26 @@
                     <th scope="col">ID</th>
                     <th scope="col">ID_ARTICLE</th>
                     <th scope="col">COMMENTAIRE</th>
+                    <th scope="col">STATUS</th>
                     <th scope="col">ACTIONS</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for i in 0..nbcomment %}
+                {% for comment in comments %}
                     <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td><textarea name="" id="" cols="50" rows="1"></textarea></td>
+                        <th scope="row">{{ comment.id }}</th>
+                        <td>{{ comment.articleId }}</td>
+                        <td><textarea readonly name="" id="" cols="50" rows="1">{{ comment.content|raw }}</textarea></td>
                         <td>
-                            <a href="/validate"><i class="fa-solid fa-check fa-2x me-2"></i></a>
-                            <a href="/hide"><i class="fa-solid fa-xmark fa-2x me-2"></i></a>
-                            <a id="delete"><i class="fa-solid fa-trash fa-2x me-2" onclick="confirmation()"></i></a>
+                            <select class="status-select" name="status" id="comment{{ comment.id }}">
+                                <option value="1" {% if comment.status == "waiting" %} {{ "selected" }} {% endif %}>En attente de validation</option>
+                                <option value="2" {% if comment.status == "published" %} {{ "selected" }} {% endif %}>Validé</option>
+                                <option value="3" {% if comment.status == "hided" %} {{ "selected" }} {% endif %}>Refusé</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a ><i class="fa-solid fa-check fa-2x me-2"onclick="changeConfirmation({{ comment.id }})"></i></a>
+                            <a id="delete"><i class="fa-solid fa-trash fa-2x me-2" onclick="deleteConfirmation({{ comment.id }})"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -42,12 +49,17 @@
 {% endblock %}
 {% block js %}
     <script type="text/javascript">
-        function confirmation() {
+        function deleteConfirmation(id) {
             let validation;
             validation = confirm('Confirmez la suppression ');
             if (validation === true) {
-                document.location.href="/delete"
+                document.location.href="comments/delete?id="+ id;
             }
+        }
+        function changeConfirmation(id) {
+            let element = document.getElementById("comment"+id)
+            let status = element.options.selectedIndex
+            document.location.href="comments/edit?id=" + id + "&status="+status;
         }
     </script>
 {% endblock %}
