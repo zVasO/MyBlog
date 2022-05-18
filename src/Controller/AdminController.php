@@ -18,9 +18,11 @@ class AdminController
     private CommentModel $comments;
     public const BASE_URL = "/admin";
     public const COMMENTS_URL = self::BASE_URL."/comments";
-    public const VALIDATE_COMMENTS_URL = self::BASE_URL."/comments/edit";
-    public const DELETE_COMMENTS_URL = self::BASE_URL."/comments/delete";
+    public const VALIDATE_COMMENTS_URL = self::COMMENTS_URL."/edit";
+    public const DELETE_COMMENTS_URL = self::COMMENTS_URL."/delete";
     public const ARTICLES_URL = self::BASE_URL."/articles";
+    public const EDIT_ARTICLE_URL = self::ARTICLES_URL."/edit";
+    public const DELETE_ARTICLE_URL = self::ARTICLES_URL."/delete";
 
 
     public function __construct()
@@ -45,8 +47,11 @@ class AdminController
 
     public function showArticlesManagementPage(): void
     {
-        echo $this->twig->getTwig()->render("admin/dashboard.html.twig", [
-            "session" => $_SESSION
+        echo $this->twig->getTwig()->render("admin/article.html.twig", [
+            "session" => $_SESSION,
+            "articles"=> $this->articles->getAllArticles(),
+            "users" => $this->users
+
         ]);
     }
 
@@ -72,5 +77,17 @@ class AdminController
         $this->comments->changeStatus($commentId, $status);
         //on recharge la page
         header("Location:".self::COMMENTS_URL);
+    }
+    public function editArticle(int $id)
+    {
+        echo $this->twig->getTwig()->render("admin/edit-article.html.twig", [
+            "session" => $_SESSION,
+            "article" => $this->articles->getArticleById($id)
+        ]);
+    }
+    public function deleteArticle(int $id)
+    {
+        $this->articles->deleteArticleById($id);
+        header("Location:".self::ARTICLES_URL);
     }
 }
