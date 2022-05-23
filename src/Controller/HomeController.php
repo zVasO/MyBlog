@@ -54,7 +54,6 @@ class HomeController
      */
     public function sendMail():void
     {
-        // function mail(string $to, string $subject, string $message, array|string $additional_headers, string $additional_params): bool {}
         $headers = array(
             'From' => $_POST['email'],
             'Reply-To' => $_POST['email'],
