@@ -50,7 +50,6 @@ class RouterService
         //switch en fonction de l'uri, on donne la page demandée
         switch ($_SERVER['QUERY_STRING']) {
             case ArticleController::BASE_URL :
-                //TODO verifier id
                 (new ArticleController())->showArticle($id);
                 break;
             case BlogController::BASE_URL:

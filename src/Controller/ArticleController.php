@@ -41,7 +41,7 @@ class ArticleController
      */
     public function showArticle(int $idArticle): void
     {
-        if ($this->articles->getArticleById($idArticle) !== false) {
+        if ($this->articles->getArticleById($idArticle) !== null) {
             echo $this->twig->getTwig()->render("article.html.twig", [
                 "article" => $this->articles->getArticleById($idArticle),
                 "comments" => $this->comment->getAllPublishedCommentByArticleId($idArticle),
