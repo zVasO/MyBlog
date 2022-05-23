@@ -44,6 +44,8 @@ class RouterService
      */
     public static function navigate()
     {
+        //var_dump($_SERVER);
+        //die;
         $id = self::getUrlParameter("id");
         //switch en fonction de l'uri, on donne la page demandée
         switch ($_SERVER['QUERY_STRING']) {
@@ -104,9 +106,10 @@ class RouterService
                 }
                 (new AdminController())->showAddArticlePage();
                 break;
-            case HomeController::BASE_CONTACT_FORM_URL:
-                if ($_SERVER['REQUEST_METHOD'] === "POST") {
+            case HomeController::BASE_HOME:
+                if ($_SERVER['REQUEST_METHOD'] === "POST" && $_POST["form"] === HomeController::BASE_CONTACT_FORM) {
                     (new HomeController())->sendMail();
+                    break;
                     break;
                 }
                 (new HomeController())->showHome();

@@ -19,11 +19,23 @@ class ArticleModel
     }
 
     /**
-     * @return bool|array|null
+     * @return bool|array
      */
     public function getAllArticles(): bool|array
     {
-        $query = 'SELECT * FROM article';
+        $query = 'SELECT * FROM article WHERE status = 1 OR status = 2';
+        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
+        if ($result === false) {
+            return [];
+        }
+        return $result;
+    }
+    /**
+     * @return bool|array
+     */
+    public function getAllPublishedArticles(): bool|array
+    {
+        $query = 'SELECT * FROM article WHERE status = 2 ORDER BY created_at DESC';
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
         if ($result === false) {
             return [];
@@ -43,6 +55,16 @@ class ArticleModel
     public function getArticlesByNumber(int $numberOfArticles): array
     {
         $query = "SELECT * FROM article LIMIT $numberOfArticles";
+        $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
+        if ($result === false) {
+            return [];
+        }
+        return $result;
+    }
+
+    public function getPublishedArticlesByNumber(int $numberOfArticles): array
+    {
+        $query = "SELECT * FROM article WHERE status = 2 ORDER BY created_at DESC LIMIT $numberOfArticles  ";
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, ArticleEntity::class)->fetchAll();
         if ($result === false) {
             return [];
@@ -98,7 +120,12 @@ class ArticleModel
     public function deleteArticleById(int $articleId): void
     {
         $query = "DELETE FROM article WHERE id = $articleId";
-        $this->getPdo()->query($query);
+        $query = "UPDATE article SET status = :status WHERE id = :article";
+        $data = [
+            'status' => 3,
+            'article' => $articleId
+        ];
+        $this->getPdo()->prepare($query)->execute($data);
     }
 
 

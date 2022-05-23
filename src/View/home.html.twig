@@ -84,7 +84,11 @@
                 <!-- To make this form functional, sign up at-->
                 <!-- https://startbootstrap.com/solution/contact-forms-->
                 <!-- to get an API token!-->
-                <form id="contactForm" method="post" action="contact">
+                <form id="contactForm" method="post" action="#contact">
+
+                    {% if message is defined and message is not null %}
+                        {{ message|raw }}
+                    {% endif %}
                     <div class="form-floating mb-3">
                         <input class="form-control" name="subject" id="sujet" type="text"  required/>
                         <label for="sujet">Sujet</label>
@@ -110,11 +114,8 @@
                         <textarea class="form-control" id="message" type="text" style="height: 10rem" name="message" required></textarea>
                         <label for="message">Message</label>
                     </div>
-                    <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Envoyer</button>
+                    <button class="btn btn-primary btn-xl" name="form" id="submitButton" type="submit" value="contact">Envoyer</button>
                 </form>
-                {% if message is defined and message is not null %}
-                    {{ message|raw }}
-                {% endif %}
             </div>
         </div>
     </div>

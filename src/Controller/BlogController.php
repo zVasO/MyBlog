@@ -24,7 +24,7 @@ class BlogController
     public function showBlog(): void
     {
         echo $this->twig->getTwig()->render("blog.html.twig", [
-            "articles" => $this->articles->getAllArticles(),
+            "articles" => $this->articles->getAllPublishedArticles(),
             "comments" => $this->comments,
             "session" => $_SESSION
 

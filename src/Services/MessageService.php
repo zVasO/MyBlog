@@ -30,12 +30,9 @@ class MessageService
      */
     public static function getMessage(string $typeAlert = null, string $message = null): string
     {
-        //todo prendre le type alert et recupere le message grace au taleau en constantes
-        //todo si message non null on garde le message au lieu de celui du tableau
         if ($message === null) {
             return '';
         }
         return "<div class=\"alert alert-" . $typeAlert . "\"role=\"alert\">" . $message . "</div>";
     }
-
 }
