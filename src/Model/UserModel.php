@@ -24,7 +24,7 @@ class UserModel
      */
     public function getUserByEmail(string $email): mixed
     {
-        $query = "SELECT * FROM user WHERE email = '" . $email . "'";
+        $query = "SELECT * FROM user WHERE email = '$email' ";
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, UserEntity::class)->fetch();
         if ($result === false) {
             return null;
@@ -42,7 +42,7 @@ class UserModel
 
     public function getUserById(int $id)
     {
-        $query = "SELECT * FROM user WHERE id = '" . $id . "'";
+        $query = "SELECT * FROM user WHERE id = '$id' ";
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, UserEntity::class)->fetch();
         if ($result === false) {
             return null;
@@ -57,7 +57,7 @@ class UserModel
      */
     public function ensureUserExist(string $email): mixed
     {
-        $query = "SELECT * FROM user WHERE email = '" . $email . "'";
+        $query = "SELECT * FROM user WHERE email = '$email' ";
         return $this->getPdo()->query($query, PDO::FETCH_CLASS, UserEntity::class)->fetch();
     }
 
@@ -79,7 +79,7 @@ class UserModel
             'firstname' => $firstname,
             'role' => '1'
         ];
-        $test = $this->getPdo()->prepare($query)->execute($data);
+        $this->getPdo()->prepare($query)->execute($data);
     }
 
     /**
@@ -88,7 +88,7 @@ class UserModel
      */
     public function getIdByEmail(string $email): null|int
     {
-        $query = "SELECT id FROM user WHERE email = '" . $email . "'";
+        $query = "SELECT id FROM user WHERE email = '$email' ";
         $result = $this->getPdo()->query($query, PDO::FETCH_CLASS, UserEntity::class)->fetch();
         if ($result === false) {
             return null;
