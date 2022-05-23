@@ -14,8 +14,9 @@ use Twig\Error\SyntaxError;
 
 class HomeController
 {
-    private const HOME_ARTICLES_NUMBER = 6;
-    public const BASE_CONTACT_FORM_URL = "/contact";
+    private const HOME_ARTICLES_NUMBER = 3;
+    public const BASE_HOME = "/home";
+    public const BASE_CONTACT_FORM = "contact";
     private TwigService $twig;
     private ArticleModel $articles;
     private MessageService $message;
@@ -39,7 +40,7 @@ class HomeController
     {
 
         echo $this->twig->getTwig()->render("home.html.twig", [
-            "articles" => $this->articles->getArticlesByNumber(self::HOME_ARTICLES_NUMBER),
+            "articles" => $this->articles->getPublishedArticlesByNumber(self::HOME_ARTICLES_NUMBER),
             "comments" => $this->comments,
             "session" => $_SESSION
         ]);
