@@ -28,7 +28,7 @@ class CommentService
     {
         if (isset($_POST['btn-comment'])) {
             //on regarde si l'utilisateur est connecté
-            if (isset($_SESSION['status']) && $_SESSION['status'] == true) {
+            if (isset($_SESSION['status']) && $_SESSION['status'] === true) {
                 //on regarde si le commentaire est non null
                 if (!empty($_POST['comment'])) {
                     $comment = strip_tags($_POST['comment']);
