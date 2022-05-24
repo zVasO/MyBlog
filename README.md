@@ -14,5 +14,7 @@ Mettre a jour le .env
 
 ### Informations importantes
 Compte Admin : admin@myblog.fr:motdepasse
+
 Configurer la fonction mail() de PHP (https://www.it-connect.fr/wamp-envoyer-des-mails-via-php-avec-mail/) 
+
 Adapter le .htaccess à votre environnement de travail
