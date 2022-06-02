@@ -1,0 +1,123 @@
+{% extends "template.html.twig" %}
+{%  block main %}
+<!-- Masthead-->
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img class="masthead-avatar mb-5" src="public/assets/img/avataaars.svg" alt="..." />
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">GERMANN Dylan</h1><br>
+        <h4 class=" text-uppercase mb-0">Le développeur qu'il vous faut !</h4>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="masthead-subheading font-weight-light mb-0">Développeur web</p>
+    </div>
+</header>
+<!-- Portfolio Section-->
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Liste des Articles</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            {%  for article in articles %}
+                {% include "/template/previewArticle.html.twig" %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- About Section-->
+<section class="page-section bg-primary text-white mb-0" id="about">
+    <div class="container">
+        <!-- About Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-white">A Propos de moi </h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- About Section Content-->
+        <div class="row">
+            <div class="col-lg-4 ms-auto"><p class="lead">Dylan passioné par le web en général, j'ai commencé mes études avec un Bac Pro Sen, pour ensuite faire un BTS SIO..</p></div>
+            <div class="col-lg-4 me-auto"><p class="lead">Maintenant étudiant chez OpenClassrooms dans la formation de développeur web Symfony, en alternance chez Wobz, je continue de me former dans le but d'etre freelance dans quelques années !</p></div>
+        </div>
+        <!-- About Section Button-->
+        <div class="text-center mt-4">
+        <div class="text-center mt-4">
+            <a class="btn btn-xl btn-outline-light" href="public\assets\CV_GERMANN_DYLAN.pdf" download="">
+                <i class="fas fa-download me-2"></i>
+                Télécharger mon CV
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Contact Section-->
+<section class="page-section" id="contact">
+    <div class="container">
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Me contacter</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Contact Section Form-->
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form id="contactForm" method="post" action="#contact">
+
+                    {% if message is defined and message is not null %}
+                        {{ message|raw }}
+                    {% endif %}
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="subject" id="sujet" type="text"  required/>
+                        <label for="sujet">Sujet</label>
+                    </div>
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="name" id="name" type="text"  required/>
+                        <label for="name">Nom Complet</label>
+                    </div>
+
+                    <!-- Email address input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="email" id="email" type="email"  required/>
+                        <label for="email">Adresse Email</label>
+                    </div>
+                    <!-- Phone number input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="phone" id="phone" type="tel"  pattern="0[0-9]{9}"/>
+                        <label for="phone">Numéro de Téléphone (format:0612344556)</label>
+                    </div>
+                    <!-- Message input-->
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="message" type="text" style="height: 10rem" name="message" required></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <button class="btn btn-primary btn-xl" name="form" id="submitButton" type="submit" value="contact">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
